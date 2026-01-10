@@ -1,0 +1,668 @@
+/* style.css - dark-only, animations, and updated buttons */
+
+/* Dark theme variables (default; light mode removed) */
+:root{
+  --max-width:1200px;
+  --bg: #07070a;
+  --paper: #0f1114;
+  --muted: #9a9aa2;
+  --text: #eaeaea;
+  --accent: #f5f5f8;
+  --soft: #0e0f12;
+  --card-radius: 14px;
+  --transition: 260ms cubic-bezier(.2,.9,.2,1);
+  --shadow: 0 8px 24px rgba(2,4,8,0.6);
+  --glass: rgba(10,10,12,0.6);
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,var(--bg), #050507);
+  color:var(--text);
+  line-height:1.6;
+  transition:background var(--transition), color var(--transition);
+  overflow-x:hidden;
+}
+
+/* subtle fade up animation helpers */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.animate-up {
+  opacity:0;
+  animation: fadeUp 560ms var(--delay, 0ms) cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+/* Section reveal (used by JS observer too) */
+.fade-in{opacity:0;transform:translateY(8px);transition:opacity 520ms var(--delay,0ms) cubic-bezier(.2,.9,.2,1), transform 520ms var(--delay,0ms) cubic-bezier(.2,.9,.2,1)}
+.fade-in.is-visible{opacity:1;transform:translateY(0)}
+
+/* Header */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(10,10,12,0.65), rgba(10,10,12,0.55));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  animation: dropIn 420ms ease;
+}
+@keyframes dropIn { from { transform:translateY(-8px); opacity:0 } to { transform:none; opacity:1 } }
+
+.nav{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 28px;
+}
+.brand{font-weight:700;letter-spacing:2px;color:var(--accent)}
+.nav-right{display:flex;gap:20px;align-items:center}
+.nav a{
+  color:var(--text);
+  text-decoration:none;
+  padding:6px 4px;
+  transition:opacity var(--transition), transform 220ms ease;
+  font-size:15px;
+}
+.nav a:hover{opacity:0.88; transform:translateY(-2px)}
+
+/* Hero */
+.hero{
+  height:70vh;
+  min-height:480px;
+  background-image: url('assets/Shivambackground.jpg');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(4,4,6,0.55), rgba(2,2,3,0.8));
+}
+.hero-inner{
+  position:relative;
+  color: #fff;
+  text-align:center;
+  max-width:820px;
+  padding:40px;
+  z-index:2;
+}
+
+/* Buttons - white background for Listen Now & View Releases */
+.btn{
+  padding:12px 18px;border-radius:10px;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-weight:700;
+  transition:transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease, opacity 220ms ease;
+  box-shadow: 0 6px 20px rgba(2,4,8,0.45);
+}
+.btn:hover{transform:translateY(-4px)}
+/* White button style (applies to Listen Now + View Releases) */
+.btn.white{
+  background:#ffffff;
+  color:#000000;
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 12px 30px rgba(2,4,8,0.55);
+}
+/* Keep other primary/secondary styles for other uses */
+.btn.primary{background:transparent;color:var(--accent)}
+.btn.secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.06)}
+
+/* Section base */
+.section{max-width:var(--max-width);margin:60px auto;padding:0 28px}
+.center{text-align:center}
+.subtle{color:var(--muted);max-width:700px;margin:8px auto 0;font-size:15px}
+
+/* Two column */
+.two-col{display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:center}
+.about p{color:var(--muted);font-size:16px}
+.about h3{margin-bottom:14px}
+.about-img{width:100%;border-radius:var(--card-radius);overflow:hidden;box-shadow: 0 10px 30px rgba(2,4,8,0.6)}
+.about-img img{width:100%;display:block;transform:scale(1.02);transition:transform 700ms ease}
+.about-img img:hover{transform:scale(1.06)}
+
+/* Releases grid */
+.grid-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:36px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;overflow:hidden;transition:transform 320ms cubic-bezier(.2,.9,.2,1), box-shadow 320ms ease}
+.card:hover{transform:translateY(-10px) scale(1.02);box-shadow: 0 22px 50px rgba(2,4,8,0.6)}
+.card-img{height:300px;background-size:cover;background-position:center}
+.card-body{padding:18px}
+.card h4{margin:6px 0}
+.meta{color:var(--muted);font-size:14px}
+
+/* Covers */
+.covers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:30px}
+.cover-item{padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:space-between;transition:transform 260ms ease}
+.cover-item:hover{transform:translateY(-6px)}
+.cover-left{display:flex;gap:12px;align-items:center}
+.thumb{width:54px;height:54px;border-radius:50%;background:linear-gradient(180deg,#151517,#0b0b0d);display:flex;align-items:center;justify-content:center;font-weight:700}
+.title{font-weight:600}
+
+/* Social */
+.social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+.social-card{padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;gap:14px;transition:transform 260ms ease}
+.social-card:hover{transform:translateY(-6px)}
+.icon{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#111,#0b0b0d);font-weight:700}
+/* Make anchor-based social-card behave like the div-based cards */
+.social-grid a.social-card {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 14px;
+  transition: transform 260ms ease, box-shadow 260ms ease, opacity 180ms ease;
+  /* preserve the same subtle background by default */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.02);
+}
+.social-grid a.social-card:hover { transform: translateY(-6px); opacity: 0.98; }
+
+/* Icon circle behaves the same but allow brand backgrounds */
+.social-grid .icon { width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex: 0 0 54px; }
+
+/* Brand-specific styles */
+.social-instagram .icon {
+  /* Instagram gradient (approx) */
+  background: radial-gradient(circle at 30% 30%, #f58529 0%, #dd2a7b 35%, #8134af 65%, #515bd4 100%);
+  box-shadow: 0 6px 16px rgba(133,60,150,0.28);
+}
+.social-youtube .icon {
+  background: #FF0000;
+  box-shadow: 0 6px 16px rgba(255,0,0,0.18);
+}
+.social-spotify .icon {
+  background: #1DB954;
+  box-shadow: 0 6px 16px rgba(29,185,84,0.16);
+}
+.social-applemusic .icon {
+  /* Apple Music: subtle deep/punchy gradient */
+  background: linear-gradient(135deg, #e94e77 0%, #6a82fb 100%);
+  box-shadow: 0 6px 16px rgba(106,130,251,0.12);
+}
+
+/* Ensure SVG icons are white and centered */
+.social-grid .icon svg { display:block; width:20px; height:20px; }
+
+/* Slightly bolder titles on social cards */
+.social-grid .title{ font-weight:700; color:var(--text); }
+.social-grid .meta{ color:var(--muted); font-size:14px; margin-top:4px; }
+
+/* Responsive: ensure grid adapts to different widths (4-column -> 2 or 1) */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 26px;
+}
+@media (max-width:1000px){
+  .social-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width:560px){
+  .social-grid { grid-template-columns: 1fr; }
+}
+
+
+/* Newsletter */
+.newsletter{display:flex;gap:14px;justify-content:center;margin:50px 0}
+.newsletter input{padding:14px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);min-width:360px;background:transparent;color:var(--text)}
+.newsletter button{background:var(--accent);color:#000;padding:12px 18px;border-radius:10px;border:none}
+
+/* Footer */
+footer{padding:60px 20px;text-align:center;color:var(--muted)}
+.footer-brand{font-weight:600;letter-spacing:2px;margin-bottom:12px}
+.footer-icons{margin:18px 0}
+
+/* compact spotify embeds layout */
+.compact-spotify-embeds {
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+  margin-top:28px;
+  margin-bottom:28px;
+}
+
+/* Responsive */
+@media (max-width:1100px){
+  .grid-cards{grid-template-columns:repeat(3,1fr)}
+  .two-col{grid-template-columns:1fr 360px}
+}
+@media (max-width:800px){
+  .grid-cards{grid-template-columns:repeat(2,1fr)}
+  .social-grid{grid-template-columns:repeat(2,1fr)}
+  .covers-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .hero{height:56vh}
+  .nav{padding:12px}
+  .two-col{grid-template-columns:1fr}
+  .grid-cards{grid-template-columns:1fr}
+  .nav-right a{display:none}
+}
+/* Liquid Glass Container */
+.contact-glass-box {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 24px 20px;
+  max-width: 450px;           /* Smaller width */
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.35);
+  font-family: sans-serif;
+}
+
+/* Heading */
+.contact-glass-box h2 {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Fixed button grid */
+.social-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* Always 2 columns */
+  gap: 10px;
+}
+
+/* Buttons */
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;           /* Smaller padding */
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  color: white;
+  font-size: 13px;             /* Smaller text */
+  height: 38px;                /* Ensures equal button height */
+}
+
+/* Hover effect */
+.social-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+
+/* Icons */
+.social-icon {
+  height: 16px;                /* Smaller icons */
+  margin-right: 6px;
+}
+
+/* Mobile: 1 column layout */
+@media (max-width: 420px) {
+  .social-columns {
+    grid-template-columns: 1fr;
+  }
+}
+/* contact-section.css
+   Glass panel with contact blocks, buttons and address
+*/
+
+.contact-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 18px;
+  padding: 34px;
+  max-width: 1100px;
+  margin: 28px auto;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* optional decorative image in top-right */
+.contact-panel__art {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  width: 120px;
+  height: 120px;
+  opacity: 0.08;
+  pointer-events: none;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* layout */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+/* each block inside */
+.contact-block {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+/* left icon column */
+.contact-block__icon {
+  font-size: 26px;
+  width: 46px;
+  height: 46px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  box-shadow: inset 0 -2px 4px rgba(255,255,255,0.02);
+  flex-shrink: 0;
+}
+
+/* heading + text */
+.contact-block__content h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  letter-spacing: -0.2px;
+  font-weight: 700;
+  color: #fff;
+}
+.contact-block__content p {
+  margin: 0 0 12px 0;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.45;
+  font-size: 15px;
+}
+
+/* big primary button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0,0,0,0.45); }
+
+/* colour variants */
+.btn--primary { background: linear-gradient(180deg,#3b82f6,#2b6ef6); }
+.btn--whatsapp { background: linear-gradient(180deg,#29d060,#21b54a); }
+.btn--email { background: linear-gradient(180deg,#4f7cff,#2e58e6); }
+
+/* Social row */
+.social-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.social-pill {
+  padding: 10px 18px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform .14s ease;
+}
+.social-pill:hover { transform: translateY(-3px); }
+
+/* social colours */
+.pill--ig { background: linear-gradient(90deg,#f5606d,#f77737); }
+.pill--yt { background: #ff0000; }
+.pill--fb { background: #1877f2; }
+
+/* Address block */
+.address {
+  margin-top: 6px;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.5;
+  font-size: 14px;
+}
+.address small { display: block; color: rgba(255,255,255,0.45); margin-top: 8px; font-weight: 400; }
+
+/* Responsive: two-column layout on wider screens */
+@media (min-width: 860px) {
+  .contact-grid { grid-template-columns: 1fr 1fr; align-items: start; }
+  .contact-panel__art { right: 32px; top: 28px; width: 150px; height: 150px; opacity: 0.07; }
+}
+
+/* small screens polish */
+@media (max-width: 420px) {
+  .contact-panel { padding: 20px; border-radius: 12px; }
+  .contact-block { gap: 12px; }
+  .contact-block__icon { width: 40px; height: 40px; font-size: 20px; border-radius: 10px; }
+  .btn, .social-pill { min-height: 44px; padding: 10px 14px; font-size: 14px; }
+}
+/* ===============================
+  /* ===============================
+   Liquid Glass Release Card (Extra Small)
+================================== */
+
+.release-card {
+  position: relative;
+  display: flex;
+  gap: clamp(10px, 1.2vw, 20px);
+  align-items: center;
+  width: 100%;
+  padding: 14px; /* much smaller */
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 12px 30px rgba(2, 3, 5, 0.45),
+              inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+/* Smaller reflections */
+.release-card::before,
+.release-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.release-card::before {
+  top: -30%;
+  left: -15%;
+  right: -15%;
+  height: 35%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03));
+  filter: blur(18px);
+  opacity: 0.10;
+  transform: rotate(-6deg);
+}
+
+.release-card::after {
+  bottom: -30%;
+  left: -15%;
+  right: -15%;
+  height: 35%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  filter: blur(14px);
+  opacity: 0.06;
+}
+
+/* Inner rim */
+.release-card-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 -14px 22px rgba(0,0,0,0.4),
+              inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* Left Cover (smaller) */
+.release-cover {
+  width: 140px; /* reduced again */
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.release-cover img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 5px 14px rgba(0,0,0,0.4);
+}
+
+.release-cover figcaption {
+  font-size: 14px;
+  color: #bbbbbb;
+}
+
+/* Right Meta (smaller text) */
+.release-meta {
+  flex: 1;
+}
+
+.release-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(16px, 2.2vw, 26px); /* smaller */
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.release-title .artist { font-weight: 700; }
+
+.release-play {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  color: #ff78c7;
+}
+
+.release-subtitle {
+  color: #ff86c6;
+  font-size: 14px; /* Smaller */
+  margin-bottom: 12px;
+}
+
+/* Even Smaller Buttons */
+.release-platforms {
+  display: flex;
+  gap: 8px;             /* smaller gap */
+  flex-wrap: wrap;
+}
+
+.release-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;              /* reduced spacing */
+  padding: 6px 12px;     /* smaller padding */
+  border-radius: 8px;    /* smaller corners */
+  font-weight: 700;
+  font-size: 13px;       /* reduced text size */
+  text-decoration: none;
+  color: #fff;
+  min-width: 130px;      /* smaller width */
+  transition: transform .12s ease, filter .12s ease;
+  box-shadow: 0 5px 14px rgba(0,0,0,0.35);
+}
+
+.release-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.05);
+}
+
+.release-btn:active {
+  transform: translateY(0px);
+}
+
+/* Smaller brand icon */
+.release-btn .brand {
+  width: 18px;          /* smaller circle */
+  height: 18px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: rgba(255,255,255,0.9);
+  color: black;
+  font-size: 10px;      /* reduced icon size */
+}
+
+/* Brand colors */
+.release-btn.spotify {
+  background: linear-gradient(180deg, #2ad06b, #19a859);
+  color: #03220f;
+}
+
+.release-btn.apple {
+  background: linear-gradient(180deg, #ff7a7f, #ff4a55);
+}
+
+.release-btn.youtube {
+  background: linear-gradient(180deg, #ff4545, #d90000);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .release-btn {
+    width: 100%;
+    min-width: auto;
+    justify-content: center;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .release-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 14px;
+  }
+  .release-cover {
+    width: 120px;
+    align-self: center;
+  }
+  .release-platforms {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .release-btn {
+    width: 100%;
+    min-width: auto;
+  }
+}

@@ -1,98 +1,895 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="../favicon.png">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
   <title>Follow Me! — Shivam Madaan</title>
-  <link rel="stylesheet" href="../style.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Schoolbell&display=swap" rel="stylesheet">
+  
+ <style> /* CSS Variables for Light/Dark Mode */
+    :root {
+      --primary: #ff3366;
+      --primary-dark: #e62e5c;
+      --dark: #0a0a0a;
+      --dark-light: #1a1a1a;
+      --light: #ffffff;
+      --light-dark: #f5f5f5;
+      --text: #ffffff;
+      --text-dark: #333333;
+      --text-light: #b3b3b3;
+      --text-light-dark: #666666;
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --gradient: linear-gradient(135deg, #ff3366 0%, #ff6b6b 100%);
+      --radius: 12px;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Light Mode Variables */
+    .light-mode {
+      --dark: #ffffff;
+      --dark-light: #f5f5f5;
+      --light: #0a0a0a;
+      --text: #333333;
+      --text-dark: #0a0a0a;
+      --text-light: #666666;
+      --glass-bg: rgba(0, 0, 0, 0.05);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    /* Liquid Glass Effects */
+    .glass-effect {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .liquid-glass {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      transition: left 0.7s ease;
+    }
+
+    .light-mode .liquid-glass::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 0, 0, 0.1),
+        transparent
+      );
+    }
+
+    .liquid-glass:hover::before {
+      left: 100%;
+    }
+
+    /* Smooth Scroll */
+    .smooth-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition-smooth);
+    }
+
+    .smooth-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 2rem;
+      z-index: 1001;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .theme-toggle .sun {
+      display: none;
+    }
+
+    .light-mode .theme-toggle .sun {
+      display: block;
+    }
+
+    .light-mode .theme-toggle .moon {
+      display: none;
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+      transition: var(--transition);
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 10, 0.8);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .light-mode .site-header {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .site-header.scrolled {
+      padding: 1rem 2rem;
+      background: rgba(10, 10, 10, 0.95);
+    }
+
+    .light-mode .site-header.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      font-family: 'Schoolbell', cursive;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: white !important;
+      transition: var(--transition);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .light-mode .brand {
+      color: var(--text-dark) !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .brand:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-right a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-right a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+
+    .nav-right a:hover {
+      color: var(--primary);
+    }
+
+    .nav-right a:hover::after {
+      width: 80%;
+    }
+
+    /* Hero Section - Follow Page */
+    .hero {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: 
+        linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)),
+        url('../assets/Shivambackground.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .light-mode .hero {
+      background: 
+        linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)),
+        url('../assets/Shivambackground.jpg');
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 51, 102, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(107, 107, 255, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      letter-spacing: 3px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.2s forwards;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--text) 20%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.4s forwards;
+    }
+
+    .lead {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.6s forwards;
+    }
+
+    /* Social Section */
+    .social-section {
+      padding: 5rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .social-glass-box {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      padding: 4rem;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .social-glass-box h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      background: linear-gradient(to right, var(--text) 20%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.4;
+    }
+
+    /* Social Columns */
+    .social-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .social-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem 2rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: white;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    .social-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.7s;
+    }
+
+    .social-button:hover::before {
+      left: 100%;
+    }
+
+    .social-button:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* FIXED: Icon Styling - REMOVED ALL FILTERS */
+    .social-icon {
+      width: 28px;
+      height: 28px;
+      transition: var(--transition);
+      object-fit: contain;
+    }
+
+    /* Specific icon fixes */
+    .social-icon[src*="spotify"] {
+      filter: brightness(0) invert(1); /* Make black logo white */
+    }
+    
+    .social-icon[src*="facebook"] {
+      filter: brightness(0) invert(1); /* Make blue logo white */
+    }
+    
+    .social-icon[src*="whatsapp"] {
+      filter: brightness(0) invert(1); /* Make green logo white */
+    }
+    
+    .social-icon[src*="apple"] {
+      filter: brightness(0) invert(1); /* Make black apple logo white */
+    }
+
+    .social-button:hover .social-icon {
+      transform: scale(1.2) rotate(5deg);
+    }
+
+    /* Platform-specific colors with gradient enhancements */
+    .social-button[style*="background-color:#1DB954;"] {
+      background: linear-gradient(135deg, #1DB954, #1ed760);
+    }
+
+    .social-button[style*="background-color:#fc3c44;"] {
+      background: linear-gradient(135deg, #fc3c44, #ff6b6b);
+    }
+
+    .social-button[style*="background-color:#FF0000;"] {
+      background: linear-gradient(135deg, #FF0000, #ff3333);
+    }
+
+    .social-button[style*="background-color:#FF5500;"] {
+      background: linear-gradient(135deg, #FF5500, #ff7733);
+    }
+
+    .social-button[style*="background-color:#E1306C;"] {
+      background: linear-gradient(135deg, #E1306C, #fd1d1d);
+    }
+
+    .social-button[style*="background-color:#1877F2;"] {
+      background: linear-gradient(135deg, #1877F2, #4a9cff);
+    }
+
+    .social-button[style*="background-color:#FF9900;"] {
+      background: linear-gradient(135deg, #FF9900, #ffbb33);
+    }
+
+    .social-button[style*="background-color:#25D366;"] {
+      background: linear-gradient(135deg, #25D366, #34b7f1);
+    }
+
+    .social-button[style*="background-color:#1DA1F2;"] {
+      background: linear-gradient(135deg, #1DA1F2, #1DA1F2);
+    }
+
+    .social-button[style*="background-color:#E60023;"] {
+      background: linear-gradient(135deg, #E60023, #ff3333);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.7s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-light);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer-brand {
+      font-family: 'Schoolbell', cursive;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-icons a {
+      color: var(--text);
+      text-decoration: none;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+    }
+
+    .footer-icons a:hover {
+      color: var(--primary);
+      background: var(--glass-bg);
+    }
+
+    .copyright {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+      
+      .social-glass-box h2 {
+        font-size: 1.8rem;
+      }
+      
+      .social-columns {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+      }
+      
+      .nav-right {
+        display: none;
+      }
+      
+      .hero {
+        min-height: 40vh;
+        padding: 5rem 1.5rem 2rem;
+        background-attachment: scroll;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .lead {
+        font-size: 1.1rem;
+      }
+      
+      .social-section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .social-glass-box {
+        padding: 2rem;
+      }
+      
+      .social-button {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+      }
+      
+      .footer-icons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .social-columns {
+        grid-template-columns: 1fr;
+      }
+      
+      .social-button {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Music Note Animation */
+    .music-note {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      animation: noteFloat 3s ease-in-out forwards;
+    }
+
+    @keyframes noteFloat {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+    </style>
 </head>
 <body>
-  <header class="site-header">
+   <!-- Theme Toggle -->
+  <div class="theme-toggle glass-effect" id="themeToggle">
+    <div class="theme-icon sun">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </div>
+    <div class="theme-icon moon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header glass-effect">
     <div class="nav">
       <div class="brand">Shivam Madaan</div>
       <nav class="nav-right" Shivam-label="Primary">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#releases">Releases</a>
-        <a href="../follow/index.html">Follow Me!</a>
-        <a href="../index.html#connect">Connect</a>
+        <a href="../">Home</a>
+        <a href="../about/">About</a>
+        <a href="../releases/">Releases</a>
+        <a href="./" aria-current="page">Follow Me!</a>
+        <a href="../contact/">Contact</a>
       </nav>
     </div>
   </header>
 
+  <!-- Hero Section -->
   <main>
-    <section class="hero" role="region" aria-label="Hero" style="min-height:46vh; background-image:url('../assets/Shivambackground.jpg')">
+    <section class="hero" role="region" aria-label="Hero">
       <div class="hero-inner">
-        <div class="eyebrow animate-up">Shivam Madaan</div>
-        <h1 class="animate-up" style="--delay:80ms">Follow Me! 📱</h1>
-        <p class="lead animate-up" style="--delay:140ms">Listen to my Music across various streaming platforms</p>
+        <div class="eyebrow">Stay Connected</div>
+        <h1>Follow Me!</h1>
+        <p class="lead">Listen to my music across all major streaming platforms and join the community on social media</p>
       </div>
     </section>
-    <link rel="stylesheet" href="contact-section.css">
 
-<section id="contact-socials">
-  <div class="contact-glass-box">
+    <!-- Social Platforms Section -->
+    <section class="social-section smooth-scroll">
+      <div class="social-glass-box liquid-glass">
+        <h2>Shivam Madaan is Live on All Major Streaming Platforms and Social Media!</h2>
+        <p style="color: var(--text-light); margin-bottom: 3rem; font-size: 1.1rem;">
+          Click any platform below to follow, subscribe, or start listening. Your support means everything!
+        </p>
 
-    <h2>Smoke & Strings is Now Live on All Major Streaming Platforms and Social Media Sites!</h2>
+        <div class="social-columns">
+          <!-- Spotify -->
+          <a href="https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg" target="_blank" class="social-button liquid-glass" style="background-color:#1DB954;">
+            <!-- White Spotify SVG -->
+            <svg class="social-icon" width="28" height="28" viewBox="0 0 24 24" fill="white">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+            Spotify
+          </a>
 
-    <div class="social-columns">
+          <!-- Apple Music -->
+<a href="https://music.apple.com/us/artist/shivam-madaan/1819794229" target="_blank" class="social-button liquid-glass" style="background-color:#fc3c44;">
+  <svg class="social-icon" width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <!-- Apple logo shape -->
+    <path d="M14.94,5.19A4.38,4.38,0,0,0,16,2,4.44,4.44,0,0,0,13,3.52,4.17,4.17,0,0,0,12,6.61,3.69,3.69,0,0,0,14.94,5.19Zm2.52,7.44a4.51,4.51,0,0,1,2.16-3.81,4.66,4.66,0,0,0-3.66-2c-1.56-.16-3,.91-3.83.91s-2-.89-3.3-.87A4.92,4.92,0,0,0,4.69,9.39C2.93,12.45,4.24,17,6,19.47,6.8,20.68,7.8,22.05,9.12,22s1.75-.76,3.28-.76,2,.76,3.3.73,2.22-1.24,3.06-2.45a11,11,0,0,0,1.38-2.85A4.41,4.41,0,0,1,17.46,12.63Z"/>
+  </svg>
+  Apple Music
+</a>
 
-      <a href="https://open.spotify.com/artist/5OmYHh56IqJiXcsBcXp3be" target="_blank" class="social-button" style="background-color:#1DB954;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" class="social-icon">Spotify
-      </a>
+          <!-- YouTube -->
+          <a href="https://youtube.com/@Shivam.madaann" target="_blank" class="social-button liquid-glass" style="background-color:#FF0000;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/YouTube_social_white_circle_%282017%29.svg" class="social-icon" alt="YouTube">
+            YouTube
+          </a>
 
-      <a href="https://music.apple.com/in/artist/smoke-strings/1819793945" target="_blank" class="social-button" style="background-color:#fc3c44;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg" class="social-icon">Apple Music
-      </a>
+          <!-- SoundCloud -->
+          <a href="https://soundcloud.com/smokeandstrings" target="_blank" class="social-button liquid-glass" style="background-color:#FF5500;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" class="social-icon" alt="SoundCloud">
+            SoundCloud
+          </a>
 
-      <a href="https://youtube.com/@smokeandstrings" target="_blank" class="social-button" style="background-color:#FF0000;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/YouTube_social_white_circle_%282017%29.svg" class="social-icon">YouTube
-      </a>
+          <!-- Instagram -->
+          <a href="https://instagram.com/Shivam_Madaann" target="_blank" class="social-button liquid-glass" style="background-color:#E1306C;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="social-icon" alt="Instagram">
+            Instagram
+          </a>
 
-      <a href="https://soundcloud.com/smokeandstrings" target="_blank" class="social-button" style="background-color:#FF5500;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" class="social-icon">SoundCloud
-      </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/smokeandstrings" target="_blank" class="social-button liquid-glass" style="background-color:#1877F2;">
+            <!-- White Facebook SVG -->
+            <svg class="social-icon" width="28" height="28" viewBox="0 0 24 24" fill="white">
+              <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+            </svg>
+            Facebook
+          </a>
 
-      <a href="https://www.instagram.com/smokeandstrings" target="_blank" class="social-button" style="background-color:#E1306C;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="social-icon">Instagram
-      </a>
+          <!-- Amazon Music -->
+          <a href="https://music.amazon.com/artists/B0FCNV4QQB/smoke-strings" target="_blank" class="social-button liquid-glass" style="background-color:#FF9900;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg" class="social-icon" alt="Amazon Music">
+            Amazon Music
+          </a>
 
-      <a href="https://www.facebook.com/smokeandstrings" target="_blank" class="social-button" style="background-color:#1877F2;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="social-icon">Facebook
-      </a>
+      <!-- WhatsApp -->
+  <a href="https://www.whatsapp.com/channel/0029Vb6VsTQDzgTKAfvOrk3j" target="_blank" class="social-button liquid-glass" style="background-color:#36ce6b;">
+                <img src="../assets/WhatsApp.png" class="social-icon" alt="Amazon Music">
 
-      <a href="https://music.amazon.com/artists/B0FCNV4QQB/smoke-strings" target="_blank" class="social-button" style="background-color:#FF9900;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg" class="social-icon">Amazon Music
-      </a>
+    WhatsApp
+  </a>
+        </div>
 
-      <a href="https://www.whatsapp.com/channel/0029Vb6VsTQDzgTKAfvOrk3j" target="_blank" class="social-button" style="background-color:#25D366;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="social-icon">WhatsApp
-      </a>
-
-      <a href="https://x.com/SmokenStrings" target="_blank" class="social-button" style="background-color:#1DA1F2;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="social-icon">X (Twitter)
-      </a>
-
-      <a href="https://in.pinterest.com/smokeandstrings/" target="_blank" class="social-button" style="background-color:#E60023;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" class="social-icon">Pinterest
-      </a>
-
-    </div>
-
-  </div>
-</section>
+        <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--glass-border);">
+          <p style="color: var(--text-light); font-size: 1rem; margin-bottom: 1.5rem;">
+            Don't forget to turn on notifications so you never miss a new release!
+          </p>
+          <a href="../releases/" class="btn liquid-glass" style="background: var(--gradient); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block;">
+            Check Out Latest Releases →
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
+  <!-- Footer -->
+  <footer class="glass-effect">
     <div class="footer-brand">Shivam Madaan</div>
     <div class="footer-icons">
-      <a href="https://instagram.com/Shivammadaana" target="_blank" rel="noopener noreferrer">Instagram</a> •
-      <a href="https://youtube.com/Shivammadaan" target="_blank" rel="noopener noreferrer">YouTube</a> •
-      <a href="mailto:booking@Shivammadaana.com">Email</a>
+      <a href="https://instagram.com/Shivam_Madaann" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://youtube.com/@Shivam.madaann" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg" target="_blank" rel="noopener noreferrer">Spotify</a>
+      <a href="mailto:official@shivammadaan.com">Email</a>
     </div>
     <div class="copyright">© 2025 Shivam Madaan. All rights reserved.</div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script>
+    // Modern animations and interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      // Theme Toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      
+      // Check for saved theme or prefer-color-scheme
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+      
+      if (savedTheme === 'light' || (!savedTheme && prefersDarkScheme.matches)) {
+        body.classList.add('light-mode');
+      }
+      
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        
+        // Save theme preference
+        if (body.classList.contains('light-mode')) {
+          localStorage.setItem('theme', 'light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+        }
+      });
+
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.smooth-scroll').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Header scroll effect
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // Music note animation on click
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.social-button') || e.target.closest('.btn')) {
+          createMusicNote(e.clientX, e.clientY);
+        }
+      });
+
+      function createMusicNote(x, y) {
+        const note = document.createElement('div');
+        note.className = 'music-note';
+        note.innerHTML = '♪';
+        note.style.left = `${x}px`;
+        note.style.top = `${y}px`;
+        note.style.fontSize = `${Math.random() * 20 + 20}px`;
+        note.style.color = body.classList.contains('light-mode') 
+          ? `hsl(${Math.random() * 60 + 300}, 80%, 40%)`
+          : `hsl(${Math.random() * 60 + 300}, 100%, 65%)`;
+        
+        document.body.appendChild(note);
+        
+        setTimeout(() => {
+          note.remove();
+        }, 3000);
+      }
+
+      // Initialize animations with delay
+      setTimeout(() => {
+        document.querySelectorAll('.smooth-scroll').forEach((el, i) => {
+          el.style.transitionDelay = `${i * 0.1}s`;
+        });
+      }, 500);
+    });
+  </script>
 </body>
 </html>

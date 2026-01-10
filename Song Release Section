@@ -1,0 +1,36 @@
+      <!-- Release 2: Labon Ko -->
+      <div class="release-card liquid-glass smooth-scroll">
+      <figure class="release-cover">
+  <a href="https://open.spotify.com/track/00FXcYcgGCjuS1vR0koav1?si=369ee6c135324932" 
+     target="_blank" 
+     class="cover-link">
+    <img src="../assets/labonko.jpg" alt="Labon Ko Album Cover" loading="lazy" />
+  </a>
+</figure>
+        
+        <div class="release-meta">
+          <h2 class="release-title">
+            <span class="release-play">▶</span>
+            Labon Ko (Unplugged Version) — <span class="artist">Shivam Madaan Ft. Manmay Chauhan</span>
+          </h2>
+          
+          <p class="release-subtitle">
+            This song has always been close to us, and we have poured our hearts into this version. An intimate unplugged rendition featuring raw vocals and acoustic arrangements.
+          </p>
+          
+          <div class="release-platforms">
+            <a href="https://open.spotify.com/track/00FXcYcgGCjuS1vR0koav1?si=369ee6c135324932" target="_blank" class="release-btn spotify liquid-glass">
+              <span class="brand">♫</span>
+              Listen on Spotify
+            </a>
+            
+            <a href="https://music.apple.com/us/song/labon-ko-feat-manmay-chauhan-unplugged-version/1826512761" target="_blank" class="release-btn apple liquid-glass">
+              <span class="brand">♫</span>
+              Listen on Apple Music
+            </a>
+            
+            <a href="https://www.youtube.com/watch?v=bl0AL8H3Uh0" target="_blank" class="release-btn youtube liquid-glass">
+              <span class="brand">▶</span>
+              Watch on YouTube
+            </a>
+          </div>

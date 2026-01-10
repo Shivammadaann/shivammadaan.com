@@ -1,123 +1,1087 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="../favicon.png">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
   <title>Releases — Shivam Madaan</title>
-  <link rel="stylesheet" href="../style.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Schoolbell&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables for Light/Dark Mode */
+    :root {
+      --primary: #ff3366;
+      --primary-dark: #e62e5c;
+      --dark: #0a0a0a;
+      --dark-light: #1a1a1a;
+      --light: #ffffff;
+      --light-dark: #f5f5f5;
+      --text: #ffffff;
+      --text-dark: #333333;
+      --text-light: #b3b3b3;
+      --text-light-dark: #666666;
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --gradient: linear-gradient(135deg, #ff3366 0%, #ff6b6b 100%);
+      --radius: 16px;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Light Mode Variables */
+    .light-mode {
+      --dark: #ffffff;
+      --dark-light: #f5f5f5;
+      --light: #0a0a0a;
+      --text: #333333;
+      --text-dark: #0a0a0a;
+      --text-light: #666666;
+      --glass-bg: rgba(0, 0, 0, 0.05);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    /* Liquid Glass Effects */
+    .glass-effect {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .liquid-glass {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .liquid-glass::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      transition: left 0.7s ease;
+    }
+
+    .light-mode .liquid-glass::before {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 0, 0, 0.1),
+        transparent
+      );
+    }
+
+    .liquid-glass:hover::before {
+      left: 100%;
+    }
+
+    /* Smooth Scroll */
+    .smooth-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition-smooth);
+    }
+
+    .smooth-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 2rem;
+      z-index: 1001;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .theme-toggle .sun {
+      display: none;
+    }
+
+    .light-mode .theme-toggle .sun {
+      display: block;
+    }
+
+    .light-mode .theme-toggle .moon {
+      display: none;
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+      transition: var(--transition);
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 10, 0.8);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .light-mode .site-header {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .site-header.scrolled {
+      padding: 1rem 2rem;
+      background: rgba(10, 10, 10, 0.95);
+    }
+
+    .light-mode .site-header.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      font-family: 'Schoolbell', cursive;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: white !important;
+      transition: var(--transition);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .light-mode .brand {
+      color: var(--text-dark) !important;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .brand:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-right a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-right a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+
+    .nav-right a:hover {
+      color: var(--primary);
+    }
+
+    .nav-right a:hover::after {
+      width: 80%;
+    }
+
+    /* Hero Section - Releases Page */
+    .hero {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: 
+        linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)),
+        url('../assets/Shivambackground.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .light-mode .hero {
+      background: 
+        linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)),
+        url('../assets/Shivambackground.jpg');
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 51, 102, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(107, 107, 255, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.2s forwards;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--text) 20%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.4s forwards;
+    }
+
+    .lead {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 0.6s forwards;
+    }
+
+    /* Releases Section */
+    .releases-section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Release Card */
+    .release-card {
+      display: flex;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 3rem;
+      border: 1px solid var(--glass-border);
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .release-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.03) 50%, 
+        transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .release-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-light);
+      border-color: var(--primary);
+    }
+
+    /* Release Cover */
+    .release-cover {
+      flex: 0 0 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .release-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+
+    .release-card:hover .release-cover img {
+      transform: scale(1.05);
+    }
+
+    /* Play Overlay */
+    .release-cover::after {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 70px;
+      height: 70px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      opacity: 0;
+      transition: var(--transition-smooth);
+      z-index: 2;
+    }
+
+    .release-card:hover .release-cover::after {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Release Meta */
+    .release-meta {
+      flex: 1;
+      padding: 2.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .release-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .release-play {
+      color: var(--primary);
+      font-size: 1.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    .artist {
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .release-subtitle {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      padding-left: 2rem;
+      border-left: 2px solid var(--primary);
+    }
+
+    /* Release Platforms */
+    .release-platforms {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .release-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.75rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid transparent;
+    }
+
+    .release-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.7s;
+    }
+
+    .release-btn:hover::before {
+      left: 100%;
+    }
+
+    .release-btn .brand {
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .release-btn:hover .brand {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    /* Platform Specific Styles */
+    .spotify {
+      background: #1DB954;
+      color: white;
+    }
+
+    .spotify:hover {
+      background: #1ed760;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(29, 185, 84, 0.4);
+    }
+
+    .apple {
+      background: #fc3c44;
+      color: white;
+    }
+
+    .apple:hover {
+      background: #ff6b6b;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(252, 60, 68, 0.4);
+    }
+
+    .youtube {
+      background: #FF0000;
+      color: white;
+    }
+
+    .youtube:hover {
+      background: #ff3333;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+    }
+
+    /* Music Waves Animation */
+    .music-waves {
+      position: absolute;
+      bottom: 0;
+      right: 2rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 40px;
+      opacity: 0.5;
+    }
+
+    .wave {
+      width: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+      animation: wave 1.4s ease-in-out infinite;
+    }
+
+    .wave:nth-child(2) { animation-delay: -1.2s; height: 60%; }
+    .wave:nth-child(3) { animation-delay: -1.1s; height: 80%; }
+    .wave:nth-child(4) { animation-delay: -1.0s; height: 100%; }
+    .wave:nth-child(5) { animation-delay: -0.9s; height: 80%; }
+    .wave:nth-child(6) { animation-delay: -0.8s; height: 60%; }
+
+    /* Footer */
+    footer {
+      background: var(--dark-light);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer-brand {
+      font-family: 'Schoolbell', cursive;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-icons a {
+      color: var(--text);
+      text-decoration: none;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+    }
+
+    .footer-icons a:hover {
+      color: var(--primary);
+      background: var(--glass-bg);
+    }
+
+    .copyright {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        transform: scaleY(0.5);
+      }
+      50% {
+        transform: scaleY(1);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+      
+      .release-card {
+        flex-direction: column;
+      }
+      
+      .release-cover {
+        flex: 0 0 250px;
+      }
+      
+      .release-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+      }
+      
+      .nav-right {
+        display: none;
+      }
+      
+      .hero {
+        min-height: 40vh;
+        padding: 5rem 1.5rem 2rem;
+        background-attachment: scroll;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .lead {
+        font-size: 1.1rem;
+      }
+      
+      .releases-section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .release-meta {
+        padding: 1.5rem;
+      }
+      
+      .release-platforms {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .release-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .footer-icons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    /* Music Note Animation */
+    .music-note {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      animation: noteFloat 3s ease-in-out forwards;
+    }
+
+    @keyframes noteFloat {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+
+    /* Vinyl Record Animation */
+    .vinyl-spin {
+      animation: spin 20s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+      .cover-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .release-cover::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 70px;
+    height: 70px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .release-cover:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  </style>
 </head>
 <body>
-  <header class="site-header">
+  <!-- Theme Toggle -->
+  <div class="theme-toggle glass-effect" id="themeToggle">
+    <div class="theme-icon sun">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </div>
+    <div class="theme-icon moon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header glass-effect">
     <div class="nav">
       <div class="brand">Shivam Madaan</div>
       <nav class="nav-right" Shivam-label="Primary">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#releases">Releases</a>
-        <a href="../follow/index.html">Follow Me!</a>
-        <a href="../index.html#connect">Connect</a>
+        <a href="../">Home</a>
+        <a href="/about/">About</a>
+        <a href="./" aria-current="page">Releases</a>
+        <a href="/follow/">Follow Me!</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
   </header>
 
+  <!-- Hero Section -->
   <main>
-    <section class="hero" role="region" aria-label="Hero" style="min-height:46vh; background-image:url('../assets/Shivambackground.jpg')">
+    <section class="hero" role="region" aria-label="Hero">
       <div class="hero-inner">
-        <div class="eyebrow animate-up">Shivam Madaan</div>
-        <h1 class="animate-up" style="--delay:80ms">Releases 🎧</h1>
-        <p class="lead animate-up" style="--delay:140ms">Listen to my Music across various streaming platforms</p>
+        <div class="eyebrow">Discography</div>
+        <h1>Releases 🎧</h1>
+        <p class="lead">Explore my complete collection of music across all streaming platforms</p>
       </div>
     </section>
-    <link rel="stylesheet" href="contact-section.css">
 
-    <section class="release-card">
-  <div class="release-card-rim"></div>
+    <!-- Releases Section -->
+    <section class="releases-section">
+      <!-- Release 1: Pyaar Nai Kardi -->
+      <div class="release-card liquid-glass smooth-scroll">
+    <figure class="release-cover">
+  <a href="https://open.spotify.com/track/3NEFet2PpPJtevohQFwY1s" 
+     target="_blank" 
+     class="cover-link">
+    <img src="../assets/pyaarnaikardi.jpg" alt="Pyaar Nai Kardi Album Cover" loading="lazy" />
+  </a>
+</figure>
+        
+        <div class="release-meta">
+          <h2 class="release-title">
+            <span class="release-play">▶</span>
+            Pyaar Nai Kardi — <span class="artist">Shivam Madaan</span>
+          </h2>
+          
+          <p class="release-subtitle">
+            Official release of "Pyaar Nai Kardi" is now yours 💘🥳🌻 A heartfelt composition that captures the essence of modern romance with melodic guitar arrangements.
+          </p>
+          
+          <div class="release-platforms">
+            <a href="https://open.spotify.com/track/3NEFet2PpPJtevohQFwY1s?si=359189a7ff9a4762" target="_blank" class="release-btn spotify liquid-glass">
+              <span class="brand">♫</span>
+              Listen on Spotify
+            </a>
+            
+            <a href="https://music.apple.com/us/song/pyaar-nai-kardi/1824718377" target="_blank" class="release-btn apple liquid-glass">
+              <span class="brand">♫</span>
+              Listen on Apple Music
+            </a>
+            
+            <a href="https://www.youtube.com/watch?v=74JBDe95b14" target="_blank" class="release-btn youtube liquid-glass">
+              <span class="brand">▶</span>
+              Watch on YouTube
+            </a>
+          </div>
+          
+          <!-- Music Waves -->
+          <div class="music-waves">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+          </div>
+        </div>
+      </div>
 
-  <!-- LEFT: Cover -->
-  <figure class="release-cover">
-    <img src="../assets/pyaarnaikardi.jpg" alt="Pyaar Nai Kardi Cover" />   
-  </figure>
+      <!-- Release 2: Labon Ko -->
+      <div class="release-card liquid-glass smooth-scroll">
+      <figure class="release-cover">
+  <a href="https://open.spotify.com/track/00FXcYcgGCjuS1vR0koav1?si=369ee6c135324932" 
+     target="_blank" 
+     class="cover-link">
+    <img src="../assets/labonko.jpg" alt="Labon Ko Album Cover" loading="lazy" />
+  </a>
+</figure>
+        
+        <div class="release-meta">
+          <h2 class="release-title">
+            <span class="release-play">▶</span>
+            Labon Ko (Unplugged Version) — <span class="artist">Shivam Madaan Ft. Manmay Chauhan</span>
+          </h2>
+          
+          <p class="release-subtitle">
+            This song has always been close to us, and we have poured our hearts into this version. An intimate unplugged rendition featuring raw vocals and acoustic arrangements.
+          </p>
+          
+          <div class="release-platforms">
+            <a href="https://open.spotify.com/track/00FXcYcgGCjuS1vR0koav1?si=369ee6c135324932" target="_blank" class="release-btn spotify liquid-glass">
+              <span class="brand">♫</span>
+              Listen on Spotify
+            </a>
+            
+            <a href="https://music.apple.com/us/song/labon-ko-feat-manmay-chauhan-unplugged-version/1826512761" target="_blank" class="release-btn apple liquid-glass">
+              <span class="brand">♫</span>
+              Listen on Apple Music
+            </a>
+            
+            <a href="https://www.youtube.com/watch?v=bl0AL8H3Uh0" target="_blank" class="release-btn youtube liquid-glass">
+              <span class="brand">▶</span>
+              Watch on YouTube
+            </a>
+          </div>
+          
+          <!-- Music Waves -->
+          <div class="music-waves">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+          </div>
+        </div>
+      </div>
 
-  <!-- RIGHT: Content -->
-  <div class="release-meta">
-    <h2 class="release-title">
-      <span class="release-play">▶</span>
-      Pyaar Nai Kardi — <span class="artist">Smoke &amp; Strings</span>
-    </h2>
+      <!-- Coming Soon Section -->
+      <div class="release-card liquid-glass smooth-scroll" style="background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(255, 51, 102, 0.1) 100%);">
+        <div class="release-meta" style="width: 100%; text-align: center;">
+          <h2 class="release-title" style="justify-content: center; font-size: 2.2rem;">
+            <span class="release-play">🎵</span>
+            More Music Coming Soon!
+          </h2>
+          
+          <p class="release-subtitle" style="text-align: center; border-left: none; padding-left: 0;">
+            I'm currently working on new material. Follow me on social media to stay updated with upcoming releases and behind-the-scenes content.
+          </p>
+          
+          <a href="/follow/" class="release-btn liquid-glass" style="background: var(--gradient); margin: 2rem auto 0; display: inline-flex;">
+            <span class="brand">📱</span>
+            Follow for Updates
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <p class="release-subtitle">
-      Official Release of "Pyaar Nai Kardi" is now yours 💘🥳🌻
-    </p>
-
-    <div class="release-platforms">
-      <a href="#" class="release-btn spotify">
-        <span class="brand">♫</span>
-        Listen on Spotify
-      </a>
-
-      <a href="#" class="release-btn apple">
-        <span class="brand"></span>
-        Listen on Apple Music
-      </a>
-
-      <a href="#" class="release-btn youtube">
-        <span class="brand">▶</span>
-        Listen on YouTube
-      </a>
-    </div>
-  </div>
-</section>
-
-    <section class="release-card">
-  <div class="release-card-rim"></div>
-
-<!-- LEFT: Cover -->
-  <figure class="release-cover">
-    <img src="../assets/labonko.jpg" alt="Labon Ko Cover" />
-  </figure>
-
-  <!-- RIGHT: Content -->
-  <div class="release-meta">
-    <h2 class="release-title">
-      <span class="release-play">▶</span>
-      Labon Ko (Unplugged Version) <span class="artist">Shivam Madaan Ft. Manmay Chauhan</span>
-    </h2>
-
-    <p class="release-subtitle">
-      This song has always been close to us, and we have poured our hearts into this version.  💘
-    </p>
-
-    <div class="release-platforms">
-      <a href="#" class="release-btn spotify">
-        <span class="brand">♫</span>
-        Listen on Spotify
-      </a>
-
-      <a href="#" class="release-btn apple">
-        <span class="brand"></span>
-        Listen on Apple Music
-      </a>
-
-      <a href="#" class="release-btn youtube">
-        <span class="brand">▶</span>
-        Listen on YouTube
-      </a>
-    </div>
-  </div>
-</section>
-
-
-
-  <footer>
+  <!-- Footer -->
+  <footer class="glass-effect">
     <div class="footer-brand">Shivam Madaan</div>
     <div class="footer-icons">
-      <a href="https://instagram.com/Shivammadaana" target="_blank" rel="noopener noreferrer">Instagram</a> •
-      <a href="https://youtube.com/Shivammadaan" target="_blank" rel="noopener noreferrer">YouTube</a> •
-      <a href="mailto:booking@Shivammadaana.com">Email</a>
+      <a href="https://instagram.com/Shivam_Madaann" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://youtube.com/@Shivam.madaann" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg" target="_blank" rel="noopener noreferrer">Spotify</a>
+      <a href="mailto:official@shivammadaan.com">Email</a>
     </div>
-    <div class="copyright">© 2025 Shivam Madaan. All rights reserved.</div>
+    <div class="copyright">© 2025 Shivam Madaan. All rights reserved. | Smoke & Strings Records</div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script>
+    // Modern animations and interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      // Theme Toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      
+      // Check for saved theme or prefer-color-scheme
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+      
+      if (savedTheme === 'light' || (!savedTheme && prefersDarkScheme.matches)) {
+        body.classList.add('light-mode');
+      }
+      
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        
+        // Save theme preference
+        if (body.classList.contains('light-mode')) {
+          localStorage.setItem('theme', 'light');
+        } else {
+          localStorage.setItem('theme', 'dark');
+        }
+      });
+
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.smooth-scroll').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Header scroll effect
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // Music note animation on click
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.release-btn') || e.target.closest('.release-card')) {
+          createMusicNote(e.clientX, e.clientY);
+          
+          // Add vinyl spin effect to cover
+          const card = e.target.closest('.release-card');
+          if (card) {
+            const cover = card.querySelector('.release-cover img');
+            if (cover) {
+              cover.classList.add('vinyl-spin');
+              setTimeout(() => {
+                cover.classList.remove('vinyl-spin');
+              }, 2000);
+            }
+          }
+        }
+      });
+
+      function createMusicNote(x, y) {
+        const note = document.createElement('div');
+        note.className = 'music-note';
+        note.innerHTML = '♪';
+        note.style.left = `${x}px`;
+        note.style.top = `${y}px`;
+        note.style.fontSize = `${Math.random() * 20 + 20}px`;
+        note.style.color = body.classList.contains('light-mode') 
+          ? `hsl(${Math.random() * 60 + 300}, 80%, 40%)`
+          : `hsl(${Math.random() * 60 + 300}, 100%, 65%)`;
+        
+        document.body.appendChild(note);
+        
+        setTimeout(() => {
+          note.remove();
+        }, 3000);
+      }
+
+      // Hover effect for release cards
+      document.querySelectorAll('.release-card').forEach(card => {
+        const waves = card.querySelectorAll('.wave');
+        
+        card.addEventListener('mouseenter', () => {
+          waves.forEach(wave => {
+            wave.style.animationPlayState = 'running';
+          });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          waves.forEach(wave => {
+            wave.style.animationPlayState = 'paused';
+          });
+        });
+      });
+
+      // Initialize animations with delay
+      setTimeout(() => {
+        document.querySelectorAll('.smooth-scroll').forEach((el, i) => {
+          el.style.transitionDelay = `${i * 0.1}s`;
+        });
+      }, 500);
+
+      // Parallax effect for hero
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        const heroInner = document.querySelector('.hero-inner');
+        if (heroInner) {
+          heroInner.style.transform = `translateY(${rate}px)`;
+        }
+      });
+
+      // Initialize music waves
+      document.querySelectorAll('.wave').forEach(wave => {
+        wave.style.animationPlayState = 'paused';
+      });
+    });
+  </script>
 </body>
 </html>

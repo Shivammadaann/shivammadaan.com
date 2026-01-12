@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5NVG3FRC');</script>
-<!-- End Google Tag Manager -->
-<meta name="facebook-domain-verification" content="besexuwrfa9kec3n7mfxyq4fu3lrx5" />
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5NVG3FRC');</script>
+  <!-- End Google Tag Manager -->
+  <meta name="facebook-domain-verification" content="besexuwrfa9kec3n7mfxyq4fu3lrx5" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <title>Shivam Madaan — Musical Artist - Home</title>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Schoolbell&display=swap" rel="stylesheet">
-  
+
   <style>
     /* CSS Variables for Light/Dark Mode */
     :root {
@@ -111,11 +111,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       left: 100%;
     }
 
-    /* Smooth Scroll */
+    /* Smooth Scroll - FIXED: Added fallback for no-JS */
     .smooth-scroll {
+      opacity: 1; /* Changed from 0 to 1 as fallback */
+      transform: translateY(0); /* Changed from translateY(30px) */
+      transition: var(--transition-smooth);
+    }
+
+    /* Only apply animations if JS adds this class */
+    .js-enabled .smooth-scroll {
       opacity: 0;
       transform: translateY(30px);
-      transition: var(--transition-smooth);
     }
 
     .smooth-scroll.visible {
@@ -683,16 +689,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       h1 {
         font-size: 3rem;
       }
-      
+
       h2 {
         font-size: 2.2rem;
       }
-      
+
       .two-col {
         grid-template-columns: 1fr;
         gap: 3rem;
       }
-      
+
       .about-img {
         order: -1;
       }
@@ -703,43 +709,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         top: 1rem;
         right: 1rem;
       }
-      
+
       .nav-right {
         display: none;
       }
-      
+
       .hero {
         min-height: 75vh;
         padding: 5rem 1.5rem 3rem;
         background-attachment: scroll;
       }
-      
+
       h1 {
         font-size: 2.5rem;
       }
-      
+
       .lead {
         font-size: 1.1rem;
       }
-      
+
       .buttons {
         flex-direction: column;
         align-items: center;
       }
-      
+
       .btn {
         width: 100%;
         max-width: 300px;
       }
-      
+
       .section {
         padding: 3rem 1.5rem;
       }
-      
+
       .social-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .footer-icons {
         flex-direction: column;
         gap: 1rem;
@@ -766,33 +772,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
   </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Shivam Madaan",
-  "jobTitle": "Musical Artist",
-  "url": "https://shivammadaan.com",
-  "image": "https://shivammadaan.com/assets/aboutpage.png",
-  "sameAs": [
-    "https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg",
-"https://music.apple.com/us/artist/shivam-madaan/1819794229",
-    "https://www.youtube.com/@shivam.madaann",
-    "https://instagram.com/Shivam_madaann",
-    "https://www.facebook.com/shivammadaannn",
-    "https://x.com/Shivam_madaann"
-  ]
-}
+  
+  <!-- Schema Markup - REMOVED DUPLICATE -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shivam Madaan",
+    "jobTitle": "Musical Artist",
+    "url": "https://shivammadaan.com",
+    "image": "https://shivammadaan.com/assets/aboutpage.png",
+    "sameAs": [
+      "https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg",
+      "https://music.apple.com/us/artist/shivam-madaan/1819794229",
+      "https://www.youtube.com/@shivam.madaann",
+      "https://instagram.com/Shivam_madaann",
+      "https://www.facebook.com/shivammadaannn",
+      "https://x.com/Shivam_madaann"
+    ]
+  }
   </script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NVG3FRC"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NVG3FRC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- Theme Toggle -->
-   
   <div class="theme-toggle glass-effect" id="themeToggle">
     <div class="theme-icon sun">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -818,7 +824,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <header class="site-header glass-effect">
     <div class="nav">
       <div class="brand">Shivam Madaan</div>
-      <nav class="nav-right" Shivam-label="Primary">
+      <nav class="nav-right" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/about/">About</a>
         <a href="/releases/">Releases</a>
@@ -852,7 +858,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="two-col">
         <div class="about">
           <h3>About Shivam</h3>
-          <p>Shivam Madaan is a 24-year-old Musical Artist from Delhi, India, known for his Fingerstyle playing and Indie & Pop releases.</p>
+          <p>Shivam Madaan is a 24-year-old Musical Artist from Delhi, India, known for his Fingerstyle playing and Indie & Pop releases.</p>
           <p>Making Music with all my heart, Always & Forever.</p>
           <p>Thank you for listening. Thank you for being here. 💕</p>
           <a class="btn secondary liquid-glass" href="/about/" style="margin-top: 2rem;">Read More</a>
@@ -873,7 +879,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/00FXcYcgGCjuS1vR0koav1?utm_source=generator" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
       <div class="center" style="margin-top: 3rem;">
-        <a class="btn secondary liquid-glass" href="#releases">View All Releases</a>
+        <!-- FIXED: Changed href from #releases to /releases/ -->
+        <a class="btn secondary liquid-glass" href="/releases/">View All Releases</a>
       </div>
     </section>
 
@@ -886,36 +893,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="social-grid">
         <a class="social-card social-instagram liquid-glass" href="https://instagram.com/Shivam_Madaann" target="_blank" rel="noopener noreferrer">
           <div class="icon">
-        <img src="assets/Instagram.png" alt="Instagram" width="52" height="52">
-  </div>
-  <div>
+            <img src="assets/Instagram.png" alt="Instagram" width="52" height="52">
+          </div>
+          <div>
             <div class="title">Instagram</div>
             <div class="meta">Follow Now!</div>
           </div>
         </a>
         <a class="social-card social-youtube liquid-glass" href="https://youtube.com/@Shivam.madaann" target="_blank" rel="noopener noreferrer">
           <div class="icon">
-         <img src="assets/YouTube.png" alt="YouTube" width="52" height="52">
-  </div>
-  <div>
+            <img src="assets/YouTube.png" alt="YouTube" width="52" height="52">
+          </div>
+          <div>
             <div class="title">YouTube</div>
             <div class="meta">Subscribe Now!</div>
           </div>
         </a>
         <a class="social-card social-spotify liquid-glass" href="https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg" target="_blank" rel="noopener noreferrer">
           <div class="icon">
-                   <img src="assets/Spotify2.png" alt="Spotify" width="52" height="52">
-  </div>
-  <div>
+            <img src="assets/Spotify2.png" alt="Spotify" width="52" height="52">
+          </div>
+          <div>
             <div class="title">Spotify</div>
             <div class="meta">Stream Now</div>
           </div>
         </a>
         <a class="social-card social-applemusic liquid-glass" href="https://music.apple.com/us/artist/shivam-madaan/1819794229" target="_blank" rel="noopener noreferrer">
           <div class="icon">
-             <img src="assets/Apple Music.png" alt="Apple Music" width="52" height="52">
-  </div>
-  <div>
+            <img src="assets/Apple Music.png" alt="Apple Music" width="52" height="52">
+          </div>
+          <div>
             <div class="title">Apple Music</div>
             <div class="meta">Listen Now</div>
           </div>
@@ -930,6 +937,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="mailto:Official@shivammadaan.com" class="btn primary liquid-glass">Send Email</a>
     </section>
   </main>
+
 
   <!-- Footer -->
   <footer class="glass-effect">
@@ -950,18 +958,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // Theme Toggle
       const themeToggle = document.getElementById('themeToggle');
       const body = document.body;
-      
+
       // Check for saved theme or prefer-color-scheme
       const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
       const savedTheme = localStorage.getItem('theme');
-      
+
       if (savedTheme === 'light' || (!savedTheme && prefersDarkScheme.matches)) {
         body.classList.add('light-mode');
       }
-      
+
       themeToggle.addEventListener('click', () => {
         body.classList.toggle('light-mode');
-        
+
         // Save theme preference
         if (body.classList.contains('light-mode')) {
           localStorage.setItem('theme', 'light');
@@ -1015,9 +1023,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         note.style.color = body.classList.contains('light-mode') 
           ? `hsl(${Math.random() * 60 + 300}, 80%, 40%)`
           : `hsl(${Math.random() * 60 + 300}, 100%, 65%)`;
-        
+
         document.body.appendChild(note);
-        
+
         setTimeout(() => {
           note.remove();
         }, 3000);

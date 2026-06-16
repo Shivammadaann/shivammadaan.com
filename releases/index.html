@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explore official music releases by Shivam Madaan, including acoustic, instrumental, and unplugged indie-pop tracks." />
+  <title>Releases | Shivam Madaan</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  <script src="../assets/site-integrations.js" defer></script>
+  <script src="../assets/site-footer.js" defer></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kalam:wght@700&display=swap");
+
+    :root {
+      color-scheme: dark;
+      --black: #000000;
+      --white: #ffffff;
+      --soft-white: rgba(255, 255, 255, 0.76);
+      --muted-white: rgba(255, 255, 255, 0.56);
+      --blue: #2563eb;
+      --panel: rgba(255, 255, 255, 0.035);
+    }
+
+    * {
+      box-sizing: border-box;
+      letter-spacing: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 80;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ffffff, #60a5fa, #ffffff);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.08s linear;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(0, 0, 0, 0.96);
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.38);
+    }
+
+    .header-shell {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .brand {
+      font-family: "Kalam", cursive;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .brand:hover,
+    .brand:focus-visible {
+      opacity: 0.82;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .site-nav a {
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 9px 13px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible,
+    .site-nav a.is-active {
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 132px;
+      height: 2px;
+      background: var(--blue);
+    }
+
+    .section::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: 150px;
+      width: 380px;
+      height: 380px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      filter: blur(72px);
+      pointer-events: none;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 78px 20px 86px;
+    }
+
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .script-title {
+      margin: 0;
+      font-family: "Kalam", cursive;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 0.96;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 16px auto 0;
+      color: var(--soft-white);
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.75;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 42px auto 0;
+      max-width: 760px;
+    }
+
+    .stat-card,
+    .release-card,
+    .release-row,
+    .cta-card {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.38);
+    }
+
+    .stat-card {
+      padding: 18px;
+      text-align: center;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .stat-card span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted-white);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: "Kalam", cursive;
+      font-size: clamp(2.55rem, 5.8vw, 4.25rem);
+      line-height: 0.96;
+    }
+
+    .section-heading p {
+      margin: 12px auto 0;
+      color: var(--soft-white);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 44px;
+    }
+
+    .release-card {
+      padding: 18px;
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .release-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.055);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .release-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .release-meta p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.46);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .release-meta h3 {
+      margin: 8px 0 0;
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .release-type {
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 7px 10px;
+    }
+
+    .spotify-frame {
+      overflow: hidden;
+      border-radius: 8px;
+      background: #111111;
+    }
+
+    .spotify-frame iframe {
+      display: block;
+      width: 100%;
+      height: 152px;
+      border: 0;
+    }
+
+    .release-index {
+      display: grid;
+      gap: 12px;
+      margin-top: 44px;
+    }
+
+    .release-row {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr 0.7fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      box-shadow: none;
+    }
+
+    .release-row strong {
+      display: block;
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .release-row span {
+      color: var(--muted-white);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .listen-link {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 9px 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .listen-link:hover,
+    .listen-link:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(255, 255, 255, 0.12);
+      outline: none;
+    }
+
+    .cta-card {
+      max-width: 840px;
+      margin: 54px auto 0;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .cta-card h2 {
+      margin: 0;
+      font-size: 1.55rem;
+      font-weight: 800;
+    }
+
+    .cta-card p {
+      max-width: 560px;
+      margin: 12px auto 0;
+      color: var(--soft-white);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .platform-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .platform-button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      color: var(--white);
+      font-size: 0.84rem;
+      font-weight: 800;
+      padding: 11px 16px;
+      transition: transform 0.22s ease, filter 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .platform-button:hover,
+    .platform-button:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+      outline: none;
+    }
+
+    .platform-icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      object-fit: contain;
+    }
+
+    .spotify {
+      background: #1db954;
+    }
+
+    .youtube {
+      background: #ff0000;
+    }
+
+    .apple {
+      background: #fc3c44;
+    }
+
+    .js .reveal-target {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .js .reveal-target.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    body.page-ready .script-title {
+      animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    body.page-ready .hero p {
+      animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .release-grid {
+        grid-template-columns: 1fr;
+        max-width: 680px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .release-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header-shell {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+
+      .brand {
+        font-size: 1.55rem;
+      }
+
+      .site-nav {
+        order: 2;
+        width: 100%;
+        overflow-x: auto;
+        gap: 7px;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+      }
+
+      .site-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .site-nav a {
+        flex: 0 0 auto;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+
+      .shell {
+        padding: 56px 16px 64px;
+      }
+
+      .script-title {
+        font-size: 2.55rem;
+      }
+
+      .hero p,
+      .section-heading p {
+        max-width: 340px;
+        font-size: 0.88rem;
+      }
+
+      .stats,
+      .release-grid,
+      .release-index {
+        width: min(100%, 350px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .release-card,
+      .release-row,
+      .cta-card {
+        width: min(100%, 350px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .release-row {
+        grid-template-columns: 1fr;
+      }
+
+      .release-meta {
+        flex-direction: column;
+      }
+
+      .listen-link,
+      .platform-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .js .reveal-target {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NF3HQMRN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-shell">
+      <a class="brand" href="/" aria-label="Shivam Madaan home">Shivam Madaan</a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/releases" class="is-active">Releases</a>
+        <a href="/contact">Contact</a>
+        <a href="/blogs">Blogs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="shell">
+        <div class="hero">
+          <h1 class="script-title">Releases</h1>
+          <p>Explore Shivam Madaan's official release catalog, from acoustic instrumental work to unplugged indie-pop interpretations.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card reveal-target">
+            <strong>2</strong>
+            <span>Featured Releases</span>
+          </div>
+          <div class="stat-card reveal-target">
+            <strong>2022+</strong>
+            <span>Artist Era</span>
+          </div>
+          <div class="stat-card reveal-target">
+            <strong>Indie</strong>
+            <span>Core Sound</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-heading reveal-target">
+          <h2>All Releases</h2>
+          <p>Listen directly through embedded Spotify players, then jump to the platform when you want to save or share.</p>
+        </div>
+
+        <div class="release-grid">
+          <article class="release-card reveal-target">
+            <div class="release-meta">
+              <div>
+                <p>Shivam Madaan</p>
+                <h3>The Night We Met - Acoustic Instrumental</h3>
+              </div>
+              <span class="release-type">Acoustic</span>
+            </div>
+            <div class="spotify-frame">
+              <iframe
+                src="https://open.spotify.com/embed/track/05J1czArtu71FxK7RnXxHY?utm_source=generator&theme=0"
+                allowfullscreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                title="The Night We Met - Acoustic Instrumental">
+              </iframe>
+            </div>
+          </article>
+
+          <article class="release-card reveal-target">
+            <div class="release-meta">
+              <div>
+                <p>Shivam Madaan</p>
+                <h3>Mann Bharrya - Unplugged Version</h3>
+              </div>
+              <span class="release-type">Unplugged</span>
+            </div>
+            <div class="spotify-frame">
+              <iframe
+                src="https://open.spotify.com/embed/track/2bvi3R68LT1OlhdqVyw2Q5?utm_source=generator&theme=0"
+                allowfullscreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                title="Mann Bharrya - Unplugged Version">
+              </iframe>
+            </div>
+          </article>
+        </div>
+
+        <div class="release-index">
+          <article class="release-row reveal-target">
+            <div>
+              <strong>The Night We Met - Acoustic Instrumental</strong>
+              <span>Shivam Madaan</span>
+            </div>
+            <span>Acoustic Instrumental</span>
+            <span>Spotify Track</span>
+            <a class="listen-link" href="https://open.spotify.com/track/05J1czArtu71FxK7RnXxHY" target="_blank" rel="noopener noreferrer">Listen</a>
+          </article>
+
+          <article class="release-row reveal-target">
+            <div>
+              <strong>Mann Bharrya - Unplugged Version</strong>
+              <span>Shivam Madaan</span>
+            </div>
+            <span>Unplugged Version</span>
+            <span>Spotify Track</span>
+            <a class="listen-link" href="https://open.spotify.com/track/2bvi3R68LT1OlhdqVyw2Q5" target="_blank" rel="noopener noreferrer">Listen</a>
+          </article>
+        </div>
+
+        <div class="cta-card reveal-target">
+          <h2>Follow for future releases</h2>
+          <p>Stay close to new tracks, collaborations, and artist updates across streaming platforms.</p>
+          <div class="platform-row">
+            <a class="platform-button spotify" href="https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg" target="_blank" rel="noopener noreferrer">
+              <img class="platform-icon" src="../assets/icons/spotify.png" alt="" aria-hidden="true" />
+              Spotify
+            </a>
+            <a class="platform-button youtube" href="https://www.youtube.com/@shivam.madaann" target="_blank" rel="noopener noreferrer">
+              <img class="platform-icon" src="../assets/icons/youtube.svg" alt="" aria-hidden="true" />
+              YouTube
+            </a>
+            <a class="platform-button apple" href="https://music.apple.com/us/artist/shivam-madaan/1819794229" target="_blank" rel="noopener noreferrer">
+              Apple Music
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-site-footer></footer>
+
+  <script>
+    const root = document.documentElement;
+    const body = document.body;
+    const header = document.querySelector(".site-header");
+    const progress = document.querySelector(".scroll-progress");
+    const revealTargets = document.querySelectorAll(".reveal-target");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    root.classList.add("js");
+
+    requestAnimationFrame(() => {
+      body.classList.add("page-ready");
+    });
+
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.14
+      });
+
+      revealTargets.forEach((target, index) => {
+        target.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 80}ms`);
+        revealObserver.observe(target);
+      });
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    let ticking = false;
+    const updateOnScroll = () => {
+      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollRatio = scrollMax > 0 ? window.scrollY / scrollMax : 0;
+      progress.style.transform = `scaleX(${scrollRatio})`;
+      header.classList.toggle("is-scrolled", window.scrollY > 16);
+      ticking = false;
+    };
+
+    const requestScrollUpdate = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateOnScroll);
+      }
+    };
+
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+    window.addEventListener("resize", requestScrollUpdate);
+    updateOnScroll();
+  </script>
+</body>
+</html>

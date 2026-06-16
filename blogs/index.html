@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Read blog updates, studio notes, release stories, and guitar ideas from Shivam Madaan." />
+  <title>Blogs | Shivam Madaan</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  <script src="../assets/site-integrations.js" defer></script>
+  <script src="../assets/site-footer.js" defer></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kalam:wght@700&display=swap");
+
+    :root {
+      color-scheme: dark;
+      --black: #000000;
+      --white: #ffffff;
+      --soft-white: rgba(255, 255, 255, 0.76);
+      --muted-white: rgba(255, 255, 255, 0.56);
+      --blue: #2563eb;
+      --panel: rgba(255, 255, 255, 0.035);
+    }
+
+    * {
+      box-sizing: border-box;
+      letter-spacing: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 80;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ffffff, #60a5fa, #ffffff);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.08s linear;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(0, 0, 0, 0.96);
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.38);
+    }
+
+    .header-shell {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .brand {
+      font-family: "Kalam", cursive;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .brand:hover,
+    .brand:focus-visible {
+      opacity: 0.82;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .site-nav a {
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 9px 13px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible,
+    .site-nav a.is-active {
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 132px;
+      height: 2px;
+      background: var(--blue);
+    }
+
+    .section::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: 120px;
+      width: 360px;
+      height: 360px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      filter: blur(70px);
+      pointer-events: none;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 78px 20px 86px;
+    }
+
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .script-title {
+      margin: 0;
+      font-family: "Kalam", cursive;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 0.96;
+    }
+
+    .hero p {
+      margin: 16px auto 0;
+      max-width: 620px;
+      color: var(--soft-white);
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.75;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .blog-card {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 24px;
+      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.38);
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.055);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .blog-kicker {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .blog-card h2 {
+      margin: 14px 0 0;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .blog-card p:last-child {
+      margin: 14px 0 0;
+      color: var(--soft-white);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .blog-status {
+      width: fit-content;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 7px 11px;
+    }
+
+    .js .reveal-target {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .js .reveal-target.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    body.page-ready .script-title {
+      animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    body.page-ready .hero p {
+      animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+        max-width: 620px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header-shell {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+
+      .brand {
+        font-size: 1.55rem;
+      }
+
+      .site-nav {
+        order: 2;
+        width: 100%;
+        overflow-x: auto;
+        gap: 7px;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+      }
+
+      .site-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .site-nav a {
+        flex: 0 0 auto;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+
+      .shell {
+        padding: 56px 16px 64px;
+      }
+
+      .script-title {
+        font-size: 2.55rem;
+      }
+
+      .hero p {
+        max-width: 286px;
+        font-size: 0.88rem;
+      }
+
+      .blog-card {
+        width: min(100%, 286px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .js .reveal-target {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NF3HQMRN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-shell">
+      <a class="brand" href="/" aria-label="Shivam Madaan home">Shivam Madaan</a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/releases">Releases</a>
+        <a href="/contact">Contact</a>
+        <a href="/blogs" class="is-active">Blogs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="shell">
+        <div class="hero">
+          <h1 class="script-title">Blogs</h1>
+          <p>Notes from the studio, release stories, guitar-led ideas, and artist updates from Shivam Madaan.</p>
+        </div>
+
+        <div class="blog-grid">
+          <article class="blog-card reveal-target">
+            <div>
+              <p class="blog-kicker">Coming Soon</p>
+              <h2>Studio Notes</h2>
+              <p>Behind-the-scenes thoughts on arrangement, production choices, and how new songs take shape.</p>
+            </div>
+            <span class="blog-status">Updates Soon</span>
+          </article>
+
+          <article class="blog-card reveal-target">
+            <div>
+              <p class="blog-kicker">Coming Soon</p>
+              <h2>Fingerstyle Ideas</h2>
+              <p>Short reflections on guitar textures, practice methods, and turning melody into performance.</p>
+            </div>
+            <span class="blog-status">Updates Soon</span>
+          </article>
+
+          <article class="blog-card reveal-target">
+            <div>
+              <p class="blog-kicker">Coming Soon</p>
+              <h2>Release Stories</h2>
+              <p>Context around singles, collaborations, and the small details that shape each finished track.</p>
+            </div>
+            <span class="blog-status">Updates Soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-site-footer></footer>
+
+  <script>
+    const root = document.documentElement;
+    const body = document.body;
+    const header = document.querySelector(".site-header");
+    const progress = document.querySelector(".scroll-progress");
+    const revealTargets = document.querySelectorAll(".reveal-target");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    root.classList.add("js");
+
+    requestAnimationFrame(() => {
+      body.classList.add("page-ready");
+    });
+
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.14
+      });
+
+      revealTargets.forEach((target, index) => {
+        target.style.setProperty("--reveal-delay", `${index * 80}ms`);
+        revealObserver.observe(target);
+      });
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    let ticking = false;
+    const updateOnScroll = () => {
+      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollRatio = scrollMax > 0 ? window.scrollY / scrollMax : 0;
+      progress.style.transform = `scaleX(${scrollRatio})`;
+      header.classList.toggle("is-scrolled", window.scrollY > 16);
+      ticking = false;
+    };
+
+    const requestScrollUpdate = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateOnScroll);
+      }
+    };
+
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+    window.addEventListener("resize", requestScrollUpdate);
+    updateOnScroll();
+  </script>
+</body>
+</html>

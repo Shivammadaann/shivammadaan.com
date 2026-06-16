@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Learn about Shivam Madaan, an Indian singer-songwriter, guitarist, music producer, composer, and indie-pop artist from Delhi, India." />
+  <title>About Shivam Madaan | Musical Artist</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  <script src="../assets/site-integrations.js" defer></script>
+  <script src="../assets/site-footer.js" defer></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kalam:wght@700&display=swap");
+
+    :root {
+      color-scheme: dark;
+      --black: #000000;
+      --white: #ffffff;
+      --soft-white: rgba(255, 255, 255, 0.78);
+      --muted-white: rgba(255, 255, 255, 0.58);
+      --faint-white: rgba(255, 255, 255, 0.12);
+      --panel: rgba(255, 255, 255, 0.035);
+      --panel-strong: rgba(255, 255, 255, 0.055);
+      --blue: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      letter-spacing: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 80;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ffffff, #60a5fa, #ffffff);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.08s linear;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(0, 0, 0, 0.96);
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.38);
+    }
+
+    .header-shell {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .brand {
+      font-family: "Kalam", cursive;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .brand:hover,
+    .brand:focus-visible {
+      opacity: 0.82;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .site-nav a {
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 9px 13px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible,
+    .site-nav a.is-active {
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+    }
+
+    .about-page {
+      isolation: isolate;
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 2px;
+      width: 132px;
+      background: var(--blue);
+      opacity: 0.9;
+    }
+
+    .accent-left::before {
+      left: 0;
+    }
+
+    .accent-right::before {
+      right: 0;
+    }
+
+    .soft-orbit {
+      position: absolute;
+      z-index: 0;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.1);
+      filter: blur(58px);
+      pointer-events: none;
+    }
+
+    .soft-orbit.left {
+      top: -110px;
+      left: -130px;
+    }
+
+    .soft-orbit.right {
+      right: -70px;
+      bottom: -120px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 72px 20px;
+      min-width: 0;
+    }
+
+    .cover-hero {
+      --cover-blur: 0px;
+      --cover-shift: 0px;
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+    }
+
+    .cover-image {
+      position: absolute;
+      inset: -42px;
+      z-index: 0;
+      background-image: url("https://assets.zyrosite.com/fWR5aN6vjn1lOD1h/451541701_2282823998716557_4147927507148549891_n-7nhr78O2aFiuOi2R.png");
+      background-size: cover;
+      background-position: center;
+      filter: blur(calc(8px + var(--cover-blur))) grayscale(100%) brightness(0.58);
+      opacity: 0.36;
+      transform: translate3d(0, var(--cover-shift), 0) scale(1.08);
+      will-change: filter, transform;
+    }
+
+    .cover-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(255, 255, 255, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.44), rgba(0, 0, 0, 0.9) 72%, #000000);
+      pointer-events: none;
+    }
+
+    .hero-shell {
+      padding-top: 82px;
+      padding-bottom: 82px;
+    }
+
+    .about-script {
+      max-width: 100%;
+      margin: 0;
+      font-family: "Kalam", cursive;
+      font-weight: 700;
+      line-height: 0.96;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 5rem);
+    }
+
+    .section-title {
+      font-size: clamp(2.45rem, 5.5vw, 4.25rem);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-layout {
+      width: min(100%, 820px);
+      margin: 0 auto;
+      text-align: center;
+      min-width: 0;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 2.15fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .copy-stack {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .hero-layout .copy-stack {
+      max-width: 690px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .copy {
+      margin: 0;
+      color: var(--soft-white);
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.75;
+      overflow-wrap: break-word;
+    }
+
+    .small-copy {
+      margin: 12px 0 0;
+      color: var(--soft-white);
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-layout .btn-row {
+      justify-content: center;
+    }
+
+    .about-btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 11px 22px;
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .about-btn:hover,
+    .about-btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(255, 255, 255, 0.12);
+      outline: none;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+    }
+
+    .about-glass,
+    .about-small-card {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.38);
+    }
+
+    .about-small-card {
+      background: rgba(255, 255, 255, 0.045);
+      box-shadow: none;
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .about-small-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.065);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .profile-card {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .profile-photo-wrap {
+      position: relative;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .about-photo {
+      width: 176px;
+      height: 176px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-profile {
+      position: relative;
+      width: fit-content;
+      margin: 26px auto 0;
+    }
+
+    .hero-profile .about-photo {
+      width: 158px;
+      height: 158px;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.62);
+    }
+
+    .artist-badge {
+      position: absolute;
+      left: 50%;
+      bottom: -14px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 6px 16px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .profile-card h2 {
+      margin: 40px 0 0;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .profile-role {
+      margin: 10px 0 0;
+      color: var(--muted-white);
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .info-card {
+      min-height: 82px;
+      padding: 17px;
+    }
+
+    .about-label {
+      color: rgba(255, 255, 255, 0.46);
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .about-value {
+      margin-top: 7px;
+      color: var(--white);
+      font-size: 0.96rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .highlight-grid,
+    .platform-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 38px;
+    }
+
+    .highlight-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .highlight-card {
+      min-height: 186px;
+      padding: 24px;
+    }
+
+    .highlight-number {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .highlight-card h3 {
+      margin: 16px 0 0;
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .highlight-card p {
+      margin: 10px 0 0;
+      color: var(--muted-white);
+      font-size: 0.84rem;
+      line-height: 1.7;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tag-list span {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .cta-shell {
+      width: min(100%, 920px);
+      text-align: center;
+    }
+
+    .platform-grid {
+      grid-template-columns: repeat(4, 1fr);
+      width: min(100%, 860px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .platform-button {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 14px 18px;
+      transition: transform 0.22s ease, filter 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .platform-button:hover,
+    .platform-button:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+      outline: none;
+    }
+
+    .platform-icon {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      object-fit: contain;
+    }
+
+    .spotify {
+      background: #1db954;
+    }
+
+    .youtube {
+      background: #ff0000;
+    }
+
+    .instagram {
+      background: #e1306c;
+    }
+
+    .facebook {
+      background: #1877f2;
+    }
+
+    .site-footer {
+      background: var(--black);
+      color: var(--muted-white);
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .hero-copy,
+    .section-heading,
+    .about-glass,
+    .about-small-card {
+      min-width: 0;
+    }
+
+    .js .reveal-target {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .js .reveal-target.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    body.page-ready .hero-title {
+      animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    body.page-ready .hero-copy .eyebrow {
+      animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+    }
+
+    body.page-ready .hero-copy .copy-stack {
+      animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+    }
+
+    body.page-ready .hero-profile {
+      animation: fade-pop 0.58s ease 0.12s both;
+    }
+
+    body.page-ready .hero-copy .about-btn {
+      animation: fade-pop 0.52s ease both;
+    }
+
+    body.page-ready .hero-copy .about-btn:nth-child(1) {
+      animation-delay: 0.34s;
+    }
+
+    body.page-ready .hero-copy .about-btn:nth-child(2) {
+      animation-delay: 0.42s;
+    }
+
+    body.page-ready .profile-card {
+      animation: float-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 24px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fade-pop {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @keyframes float-in {
+      from {
+        opacity: 0;
+        transform: translate3d(22px, 18px, 0) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .split-grid,
+      .story-grid,
+      .identity-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .story-intro,
+      .identity-intro {
+        text-align: center;
+      }
+
+      .hero-copy .copy-stack {
+        max-width: 680px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-row,
+      .tag-list {
+        justify-content: center;
+      }
+
+      .highlight-grid,
+      .platform-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header-shell {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+
+      .brand {
+        font-size: 1.55rem;
+      }
+
+      .site-nav {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        gap: 7px;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+      }
+
+      .site-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .site-nav a {
+        flex: 0 0 auto;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+
+      .shell {
+        width: 100%;
+        max-width: 100%;
+        padding: 56px 16px;
+      }
+
+      .hero-layout,
+      .section-heading,
+      .story-grid,
+      .identity-grid,
+      .cta-shell {
+        width: 100%;
+        max-width: calc(100vw - 32px);
+      }
+
+      .hero-shell {
+        padding-top: 50px;
+        padding-bottom: 56px;
+      }
+
+      .hero-copy .copy-stack {
+        width: min(100%, 286px);
+      }
+
+      .hero-copy .copy {
+        font-size: 0.86rem;
+      }
+
+      .hero-title {
+        font-size: 2.65rem;
+      }
+
+      .section-title {
+        font-size: 2.55rem;
+      }
+
+      .profile-card {
+        padding: 24px;
+      }
+
+      .about-photo {
+        width: 146px;
+        height: 146px;
+      }
+
+      .cover-hero {
+        min-height: auto;
+      }
+
+      .hero-profile .about-photo {
+        width: 132px;
+        height: 132px;
+      }
+
+      .info-grid,
+      .highlight-grid,
+      .platform-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-row {
+        flex-direction: column;
+        width: min(100%, 286px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .about-btn {
+        width: 100%;
+      }
+
+      .about-glass,
+      .about-small-card,
+      .profile-card {
+        width: min(100%, 286px);
+        max-width: 286px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .profile-card .copy-stack {
+        width: min(100%, 246px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .highlight-card {
+        width: min(100%, 286px);
+      }
+
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.35rem;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+      }
+
+      .tag-list {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .js .reveal-target {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NF3HQMRN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-shell">
+      <a class="brand" href="/" aria-label="Shivam Madaan home">Shivam Madaan</a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/about" class="is-active">About</a>
+        <a href="/releases">Releases</a>
+        <a href="/contact">Contact</a>
+        <a href="/blogs">Blogs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="about-page">
+    <section class="section accent-left cover-hero" id="about-hero">
+      <div class="cover-image" aria-hidden="true"></div>
+
+      <div class="shell hero-shell">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <h1 class="about-script hero-title">About the Artist</h1>
+
+            <div class="hero-profile">
+              <div class="about-photo">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/7/76/Shivam_Madaan.jpg"
+                  alt="Shivam Madaan"
+                  onerror="this.src='https://placehold.co/500x500/111111/ffffff?text=Shivam+Madaan'"
+                />
+              </div>
+            </div>
+
+            <p class="eyebrow">Who is Shivam Madaan?</p>
+
+            <div class="copy-stack">
+              <p class="copy">
+                Shivam Madaan is a 24-year-old guitarist, music producer, composer, songwriter, singer, and musical artist from Delhi, India.
+              </p>
+              <p class="copy">
+                Known for his fingerstyle guitar playing and indie-pop releases, Shivam blends acoustic emotion with modern musical textures to create songs that feel personal, melodic, and honest.
+              </p>
+            </div>
+
+            <div class="btn-row">
+              <a class="about-btn btn-primary" href="/releases">Explore Releases</a>
+              <a class="about-btn btn-secondary" href="/contact">Contact Artist</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section accent-right" id="story">
+      <div class="shell">
+        <div class="story-grid">
+          <div class="story-intro reveal-target">
+            <h2 class="about-script section-title">The Story</h2>
+            <p class="small-copy">A musical journey built around emotion, storytelling, and evolving sound.</p>
+          </div>
+
+          <div class="about-glass profile-card reveal-target">
+            <div class="copy-stack">
+              <p class="copy">
+                Shivam started shaping his sound through guitar-led arrangements, expressive melodies, and carefully produced indie-pop ideas. His music carries a personal tone, often combining acoustic guitar or piano with subtle electronic textures.
+              </p>
+              <p class="copy">
+                He made his professional debut in 2022 and has since released multiple tracks while collaborating with other artists and steadily building a presence across streaming and social platforms.
+              </p>
+              <p class="copy">
+                His work reflects a balance between raw musicality and modern production, keeping the voice, melody, and emotion at the center of each release.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section accent-left" id="career">
+      <div class="soft-orbit right"></div>
+
+      <div class="shell">
+        <div class="section-heading reveal-target">
+          <h2 class="about-script section-title">Musical Career</h2>
+          <p class="small-copy">From guitar-led ideas to finished releases across streaming platforms.</p>
+        </div>
+
+        <div class="highlight-grid">
+          <article class="about-small-card highlight-card reveal-target">
+            <div class="highlight-number">2022</div>
+            <h3>Professional Debut</h3>
+            <p>Began releasing music professionally and building a public artist profile.</p>
+          </article>
+
+          <article class="about-small-card highlight-card reveal-target">
+            <div class="highlight-number">Indie</div>
+            <h3>Sound Direction</h3>
+            <p>Focused on indie-pop, acoustic emotion, fingerstyle guitar, and melodic arrangements.</p>
+          </article>
+
+          <article class="about-small-card highlight-card reveal-target">
+            <div class="highlight-number">Live</div>
+            <h3>Creative Evolution</h3>
+            <p>Continues working on new material, collaborations, and live performance growth.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section accent-right" id="identity">
+      <div class="shell">
+        <div class="about-glass profile-card reveal-target">
+          <div class="identity-grid">
+            <div class="identity-intro">
+              <h2 class="about-script section-title">Artist Identity</h2>
+              <p class="small-copy">A multi-disciplinary artist profile shaped by guitar, songwriting, and production.</p>
+            </div>
+
+            <div class="tag-list" aria-label="Artist skills and styles">
+              <span>Guitarist</span>
+              <span>Music Producer</span>
+              <span>Composer</span>
+              <span>Songwriter</span>
+              <span>Singer</span>
+              <span>Indie Pop</span>
+              <span>Fingerstyle</span>
+              <span>Acoustic Sound</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section accent-left" id="connect">
+      <div class="soft-orbit left"></div>
+
+      <div class="shell cta-shell">
+        <div class="section-heading reveal-target">
+          <h2 class="about-script section-title">Listen & Connect</h2>
+          <p class="small-copy">Follow Shivam Madaan across music and social platforms for releases, updates, and artist activity.</p>
+        </div>
+
+        <div class="platform-grid">
+          <a href="https://open.spotify.com/artist/49EQh2zGjwjO1vQxhXQbwg" target="_blank" rel="noopener noreferrer" class="platform-button spotify reveal-target">
+            <img class="platform-icon" src="../assets/icons/spotify.png" alt="" aria-hidden="true" />
+            Spotify
+          </a>
+          <a href="https://www.youtube.com/@shivam.madaann" target="_blank" rel="noopener noreferrer" class="platform-button youtube reveal-target">
+            <img class="platform-icon" src="../assets/icons/youtube.svg" alt="" aria-hidden="true" />
+            YouTube
+          </a>
+          <a href="https://www.instagram.com/Shivam_madaann" target="_blank" rel="noopener noreferrer" class="platform-button instagram reveal-target">
+            <img class="platform-icon" src="../assets/icons/instagram.svg" alt="" aria-hidden="true" />
+            Instagram
+          </a>
+          <a href="https://www.facebook.com/shivammadaannn" target="_blank" rel="noopener noreferrer" class="platform-button facebook reveal-target">
+            <img class="platform-icon" src="../assets/icons/facebook.svg" alt="" aria-hidden="true" />
+            Facebook
+          </a>
+        </div>
+
+        <div class="btn-row" style="justify-content: center;">
+          <a class="about-btn btn-primary" href="/contact">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer data-site-footer></footer>
+
+  <script>
+    const root = document.documentElement;
+    const body = document.body;
+    const header = document.querySelector(".site-header");
+    const progress = document.querySelector(".scroll-progress");
+    const coverHero = document.querySelector(".cover-hero");
+    const revealTargets = document.querySelectorAll(".reveal-target");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    root.classList.add("js");
+
+    requestAnimationFrame(() => {
+      body.classList.add("page-ready");
+    });
+
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.14
+      });
+
+      revealTargets.forEach((target, index) => {
+        target.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 70}ms`);
+        revealObserver.observe(target);
+      });
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    let ticking = false;
+    const updateOnScroll = () => {
+      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollRatio = scrollMax > 0 ? window.scrollY / scrollMax : 0;
+      progress.style.transform = `scaleX(${scrollRatio})`;
+      header.classList.toggle("is-scrolled", window.scrollY > 16);
+
+      if (coverHero && !prefersReducedMotion) {
+        const heroHeight = Math.max(coverHero.offsetHeight, 1);
+        const heroProgress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
+        coverHero.style.setProperty("--cover-blur", `${heroProgress * 18}px`);
+        coverHero.style.setProperty("--cover-shift", `${heroProgress * 28}px`);
+      }
+
+      ticking = false;
+    };
+
+    const requestScrollUpdate = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateOnScroll);
+      }
+    };
+
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+    window.addEventListener("resize", requestScrollUpdate);
+    updateOnScroll();
+  </script>
+</body>
+</html>

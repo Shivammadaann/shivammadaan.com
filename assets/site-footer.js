@@ -7,8 +7,7 @@
     ["Home", "/"],
     ["About", "/about"],
     ["Releases", "/releases"],
-    ["Contact", "/contact"],
-    ["Blogs", "/blogs"]
+    ["Contact", "/contact"]
   ];
 
   const supportLinks = [
@@ -23,6 +22,7 @@
     ["Instagram", "https://www.instagram.com/Shivam_madaann", `${iconBase}instagram.svg`],
     ["Facebook", "https://www.facebook.com/shivammadaannn", `${iconBase}facebook.svg`]
   ];
+  const badgeUrl = new URL("badge.png", assetBase).href;
 
   function installFooterStyles() {
     if (document.querySelector("style[data-site-footer-styles]")) {
@@ -52,6 +52,9 @@
       }
 
       .artist-footer__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         margin: 0;
         font-family: "Kalam", cursive;
         font-size: 2rem;
@@ -59,10 +62,17 @@
         line-height: 1;
       }
 
+      .artist-footer__brand .name-badge {
+        width: 22px;
+        height: 22px;
+        flex: 0 0 22px;
+        object-fit: contain;
+      }
+
       .artist-footer__copy {
         max-width: 380px;
         margin: 16px 0 0;
-        color: rgba(255, 255, 255, 0.68);
+        color: #ffffff;
         font-size: 0.92rem;
         line-height: 1.75;
       }
@@ -93,7 +103,7 @@
       }
 
       .footer-link {
-        color: rgba(255, 255, 255, 0.68);
+        color: #ffffff;
         font-size: 0.92rem;
         font-weight: 700;
         text-decoration: none;
@@ -119,7 +129,7 @@
 
       .artist-footer__copyright {
         margin: 0;
-        color: rgba(255, 255, 255, 0.55);
+        color: #ffffff;
         font-size: 0.78rem;
         font-weight: 700;
       }
@@ -215,7 +225,10 @@
       <div class="artist-footer__shell">
         <div class="artist-footer__grid">
           <div>
-            <h2 class="artist-footer__brand">Shivam Madaan</h2>
+            <h2 class="artist-footer__brand">
+              <span>Shivam Madaan</span>
+              <img class="name-badge" src="${badgeUrl}" alt="" aria-hidden="true" />
+            </h2>
             <p class="artist-footer__copy">Official music, latest releases, updates, performances, and social links.</p>
             <div class="artist-footer__contact">
               <a class="footer-link" href="mailto:official@shivammadaan.com">official@shivammadaan.com</a>
@@ -224,7 +237,7 @@
           </div>
 
           <div>
-            <h3 class="artist-footer__heading">Main Nav Menu</h3>
+            <h3 class="artist-footer__heading">Quick Links</h3>
             <div class="artist-footer__links">${linksMarkup(navLinks)}</div>
           </div>
 

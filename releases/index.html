@@ -92,12 +92,22 @@
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: "Kalam", cursive;
       font-size: 1.75rem;
       font-weight: 700;
       line-height: 1;
       white-space: nowrap;
       transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .brand .name-badge {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      object-fit: contain;
     }
 
     .brand:hover,
@@ -178,7 +188,7 @@
     .script-title {
       margin: 0;
       font-family: "Kalam", cursive;
-      font-size: clamp(3rem, 7vw, 5rem);
+      font-size: clamp(2.4rem, 5.6vw, 4rem);
       font-weight: 700;
       line-height: 0.96;
     }
@@ -240,7 +250,7 @@
     .section-heading h2 {
       margin: 0;
       font-family: "Kalam", cursive;
-      font-size: clamp(2.55rem, 5.8vw, 4.25rem);
+      font-size: clamp(2.295rem, 5.22vw, 3.825rem);
       line-height: 0.96;
     }
 
@@ -374,7 +384,7 @@
 
     .cta-card h2 {
       margin: 0;
-      font-size: 1.55rem;
+      font-size: 1.395rem;
       font-weight: 800;
     }
 
@@ -592,14 +602,16 @@
 
   <header class="site-header">
     <div class="header-shell">
-      <a class="brand" href="/" aria-label="Shivam Madaan home">Shivam Madaan</a>
+      <a class="brand" href="/" aria-label="Shivam Madaan home">
+        <span>Shivam Madaan</span>
+        <img class="name-badge" src="../assets/badge.png" alt="" aria-hidden="true" />
+      </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/releases" class="is-active">Releases</a>
         <a href="/contact">Contact</a>
-        <a href="/blogs">Blogs</a>
       </nav>
     </div>
   </header>

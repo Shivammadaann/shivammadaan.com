@@ -94,12 +94,22 @@
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: "Kalam", cursive;
       font-size: 1.75rem;
       font-weight: 700;
       line-height: 1;
       white-space: nowrap;
       transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .brand .name-badge {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      object-fit: contain;
     }
 
     .brand:hover,
@@ -240,11 +250,11 @@
     }
 
     .hero-title {
-      font-size: clamp(3rem, 7vw, 5rem);
+      font-size: clamp(2.4rem, 5.6vw, 4rem);
     }
 
     .section-title {
-      font-size: clamp(2.45rem, 5.5vw, 4.25rem);
+      font-size: clamp(2.205rem, 4.95vw, 3.825rem);
     }
 
     .split-grid {
@@ -430,7 +440,7 @@
 
     .profile-card h2 {
       margin: 40px 0 0;
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 800;
       line-height: 1.15;
     }
@@ -776,11 +786,11 @@
       }
 
       .hero-title {
-        font-size: 2.65rem;
+        font-size: 2.12rem;
       }
 
       .section-title {
-        font-size: 2.55rem;
+        font-size: 2.295rem;
       }
 
       .profile-card {
@@ -841,11 +851,11 @@
 
     @media (max-width: 480px) {
       .hero-title {
-        font-size: 2.35rem;
+        font-size: 1.88rem;
       }
 
       .section-title {
-        font-size: 2.25rem;
+        font-size: 2.025rem;
       }
 
       .tag-list {
@@ -883,14 +893,16 @@
 
   <header class="site-header">
     <div class="header-shell">
-      <a class="brand" href="/" aria-label="Shivam Madaan home">Shivam Madaan</a>
+      <a class="brand" href="/" aria-label="Shivam Madaan home">
+        <span>Shivam Madaan</span>
+        <img class="name-badge" src="../assets/badge.png" alt="" aria-hidden="true" />
+      </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="/">Home</a>
         <a href="/about" class="is-active">About</a>
         <a href="/releases">Releases</a>
         <a href="/contact">Contact</a>
-        <a href="/blogs">Blogs</a>
       </nav>
     </div>
   </header>

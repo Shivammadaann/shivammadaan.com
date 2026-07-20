@@ -14,7 +14,7 @@
 
     :root {
       color-scheme: dark;
-      --hero-image-url: url("https://assets.zyrosite.com/fWR5aN6vjn1lOD1h/451541701_2282823998716557_4147927507148549891_n-7nhr78O2aFiuOi2R.png");
+      --hero-image-url: url("assets/cover.png");
       --black: #000000;
       --white: #ffffff;
       --soft-white: rgba(255, 255, 255, 0.78);
@@ -141,12 +141,22 @@
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: "Kalam", cursive;
       font-size: 1.75rem;
       font-weight: 700;
       line-height: 1;
       white-space: nowrap;
       transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .brand .name-badge {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      object-fit: contain;
     }
 
     .brand:hover,
@@ -265,6 +275,14 @@
       max-width: 100%;
     }
 
+    h1.script-title {
+      font-size: clamp(2.4rem, 5.6vw, 4rem);
+    }
+
+    h2.script-title {
+      font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    }
+
     .eyebrow {
       margin: 10px 0 0;
       color: rgba(255, 255, 255, 0.7);
@@ -374,7 +392,18 @@
     }
 
     .artist-name {
-      font-size: 4.85rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 3.88rem;
+    }
+
+    .artist-name .name-badge {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      object-fit: contain;
     }
 
     .hero-subtitle {
@@ -458,7 +487,7 @@
     }
 
     .section-heading h2 {
-      font-size: 4.25rem;
+      font-size: 3.825rem;
     }
 
     .about-text {
@@ -617,7 +646,7 @@
       position: relative;
       min-height: 52px;
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -809,47 +838,6 @@
       cursor: pointer;
     }
 
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 42px;
-    }
-
-    .blog-card {
-      min-height: 180px;
-      padding: 22px;
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
-    }
-
-    .blog-card:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.055);
-      border-color: rgba(255, 255, 255, 0.22);
-    }
-
-    .blog-kicker {
-      margin: 0;
-      color: rgba(255, 255, 255, 0.48);
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .blog-card h3 {
-      margin: 12px 0 0;
-      font-size: 1.25rem;
-      font-weight: 800;
-      line-height: 1.25;
-    }
-
-    .blog-card p {
-      margin: 12px 0 0;
-      color: var(--soft-white);
-      font-size: 0.86rem;
-      line-height: 1.7;
-    }
-
     .site-footer {
       background: rgba(0, 0, 0, 0.56);
       color: var(--muted-white);
@@ -883,7 +871,6 @@
 
     .profile-card,
     .contact-card,
-    .blog-card,
     .release-card,
     .contact-option,
     .platform-button {
@@ -1094,7 +1081,7 @@
       }
 
       .artist-name {
-        font-size: 4rem;
+        font-size: 3.2rem;
       }
 
       .hero-subtitle {
@@ -1112,7 +1099,7 @@
       }
 
       .section-heading h2 {
-        font-size: 3.45rem;
+        font-size: 3.105rem;
       }
     }
 
@@ -1140,7 +1127,7 @@
       }
 
       .section-heading h2 {
-        font-size: 2.65rem;
+        font-size: 2.385rem;
       }
 
       .hero-image-card {
@@ -1169,8 +1156,7 @@
       }
 
       .release-grid,
-      .platform-grid,
-      .blog-grid {
+      .platform-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1191,7 +1177,7 @@
       }
 
       .section-heading h2 {
-        font-size: 2.35rem;
+        font-size: 2.115rem;
       }
 
       .hero-subtitle {
@@ -1276,14 +1262,16 @@
   <div class="scroll-progress" aria-hidden="true"></div>
   <header class="site-header">
     <div class="header-shell">
-      <a class="brand" href="#home" aria-label="Shivam Madaan home">Shivam Madaan</a>
+      <a class="brand" href="#home" aria-label="Shivam Madaan home">
+        <span>Shivam Madaan</span>
+        <img class="name-badge" src="assets/badge.png" alt="" aria-hidden="true" />
+      </a>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#home">Home</a>
         <a href="/about">About</a>
         <a href="/releases">Releases</a>
         <a href="/contact">Contact</a>
-        <a href="/blogs">Blogs</a>
       </nav>
 
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
@@ -1297,8 +1285,10 @@
       <div class="shell hero-shell">
         <div class="hero-grid">
           <div class="hero-copy">
-            <h1 class="script-title artist-name">Shivam Madaan</h1>
-            <p class="hero-subtitle">Musical Artist</p>
+            <h1 class="script-title artist-name">
+              <span>Shivam Madaan</span>
+              <img class="name-badge" src="assets/badge.png" alt="" aria-hidden="true" />
+            </h1>
 
             <div class="artist-tags" aria-label="Artist roles">
               <span>Guitarist</span>
@@ -1319,7 +1309,7 @@
             <div class="hero-image-card">
               <img
                 class="hero-main-image"
-                src="https://assets.zyrosite.com/fWR5aN6vjn1lOD1h/451541701_2282823998716557_4147927507148549891_n-7nhr78O2aFiuOi2R.png"
+                src="assets/cover.png"
                 alt=""
               />
             </div>
@@ -1399,14 +1389,7 @@
         <div class="release-grid">
           <article class="release-card" aria-label="Spotify release">
             <div class="spotify-frame">
-              <iframe
-                data-testid="embed-iframe"
-                src="https://open.spotify.com/embed/track/05J1czArtu71FxK7RnXxHY?utm_source=generator&theme=0"
-                allowfullscreen
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                title="Spotify track player 1">
-              </iframe>
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/00FXcYcgGCjuS1vR0koav1?utm_source=generator&theme=0&si=588a21a6c34b49ce" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
           </article>
 

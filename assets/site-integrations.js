@@ -3,19 +3,24 @@
   const GTM_CONTAINER_ID = "GTM-NF3HQMRN";
   const DEFAULT_FAVICON = "/favicon.png";
 
-  const personSchema = {
-    "@context": "https://schema.org",
+  const SITE_URL = "https://shivammadaan.com";
+  const PERSON_ID = `${SITE_URL}/#person`;
+  const WEBSITE_ID = `${SITE_URL}/#website`;
+
+  // Keep every reference to the artist pointed at this one canonical entity.
+  // This makes the official site, profile pages, and verified music/social
+  // profiles easier for crawlers to reconcile as the same person.
+  const person = {
     "@type": "Person",
-    "@id": "https://shivammadaan.com/#person",
+    "@id": PERSON_ID,
     "name": "Shivam Madaan",
     "alternateName": [
       "Shivam Madaann",
       "Shivam_madaann"
     ],
-    "url": "https://shivammadaan.com",
+    "url": SITE_URL,
     "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://shivammadaan.com"
+      "@id": `${SITE_URL}/#webpage`
     },
     "image": {
       "@type": "ImageObject",
@@ -30,6 +35,11 @@
       "https://www.instagram.com/shivam_madaann",
       "https://www.wikidata.org/wiki/Q138820934"
     ],
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "Wikidata",
+      "value": "Q138820934"
+    },
     "jobTitle": "Singer-Songwriter",
     "hasOccupation": {
       "@type": "Occupation",
@@ -43,6 +53,14 @@
       "@type": "Place",
       "name": "Delhi, India"
     },
+    "email": "official@shivammadaan.com",
+    "telephone": "+91-84455-44920",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "artist enquiries",
+      "email": "official@shivammadaan.com",
+      "telephone": "+91-84455-44920"
+    },
     "knowsAbout": [
       "Singing",
       "Songwriting",
@@ -51,7 +69,8 @@
       "Mixing and Mastering",
       "Indie Pop Music"
     ],
-    "description": "Shivam Madaan is an Indian singer-songwriter, multi-instrumentalist, music producer, and mix/master engineer from Delhi, India, known for fingerstyle guitar and indie-pop releases."
+    "description": "Shivam Madaan is an Indian singer-songwriter, multi-instrumentalist, music producer, and mix/master engineer from Delhi, India, known for fingerstyle guitar and indie-pop releases.",
+    "disambiguatingDescription": "Indian singer-songwriter and music producer from Delhi, India."
   };
 
   window.dataLayer = window.dataLayer || [];
@@ -102,10 +121,41 @@
       return;
     }
 
+    const canonicalPath = window.location.pathname === "/" ? "/" : window.location.pathname.replace(/\/$/, "");
+    const pageUrl = `${SITE_URL}${canonicalPath}`;
+    const isArtistProfile = canonicalPath === "/" || canonicalPath === "/about";
+    const page = {
+      "@type": isArtistProfile ? "ProfilePage" : "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      "url": pageUrl,
+      "name": document.title,
+      "isPartOf": { "@id": WEBSITE_ID },
+      "about": { "@id": PERSON_ID }
+    };
+
+    if (isArtistProfile) {
+      page.mainEntity = { "@id": PERSON_ID };
+    }
+
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": WEBSITE_ID,
+          "url": SITE_URL,
+          "name": "Shivam Madaan",
+          "publisher": { "@id": PERSON_ID }
+        },
+        page,
+        person
+      ]
+    };
+
     const schema = document.createElement("script");
     schema.type = "application/ld+json";
     schema.dataset.siteSchema = "person";
-    schema.textContent = JSON.stringify(personSchema);
+    schema.textContent = JSON.stringify(schemaData);
     document.head.appendChild(schema);
   }
 

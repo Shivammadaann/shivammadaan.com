@@ -2,6 +2,7 @@
   const GA_MEASUREMENT_ID = "G-E5VL2CDSG7";
   const GTM_CONTAINER_ID = "GTM-NF3HQMRN";
   const DEFAULT_FAVICON = "/favicon.png";
+  const WATI_WEBCHAT_URL = "https://widget.wati.io/webchat.js?t=1099916&s=manual&d=328e6a25-582c-4fea-b9f5-540301f4c408";
 
   const SITE_URL = "https://shivammadaan.com";
   const PERSON_ID = `${SITE_URL}/#person`;
@@ -116,6 +117,10 @@
     appendScriptOnce(`https://www.googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}`, "gtm");
   }
 
+  function installWatiWebchat() {
+    appendScriptOnce(WATI_WEBCHAT_URL, "wati-webchat");
+  }
+
   function installPersonSchema() {
     if (document.querySelector('script[type="application/ld+json"][data-site-schema="person"]')) {
       return;
@@ -173,6 +178,7 @@
 
   installGoogleTagManager();
   installGoogleAnalytics();
+  installWatiWebchat();
   installPersonSchema();
   installDefaultFavicon();
 })();

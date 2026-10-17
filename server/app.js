@@ -160,7 +160,7 @@ function createApp({ config, razorpay }) {
   app.use("/assets", express.static(path.join(siteRoot, "assets"), { dotfiles: "deny", index: false, redirect: false }));
   app.get("/favicon.png", (_req, res) => res.sendFile(path.join(siteRoot, "favicon.png")));
   app.get("/sitemap.xml", (_req, res) => res.sendFile(path.join(siteRoot, "sitemap.xml")));
-  for (const page of ["", "about", "releases", "contact", "shop"]) {
+  for (const page of ["", "about", "releases", "contact", "shop", "privacy-policy", "data-deletion", "terms-of-use"]) {
     app.get(page ? `/${page}` : "/", (_req, res) => res.sendFile(path.join(siteRoot, page, "index.html")));
   }
   app.use((_req, res) => res.status(404).json({ error: "Not found." }));

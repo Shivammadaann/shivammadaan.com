@@ -5,7 +5,23 @@ Standard Checkout. It can run as one Render Web Service, or as a Render API
 behind the existing GitHub Pages frontend. No database is required: Razorpay
 stores the orders, product notes, and payment records.
 
-## Run locally
+## Connektly legal pages
+
+The public policy pages cover Connektly and its associated Meta app:
+
+- Privacy Policy: `https://shivammadaan.com/privacy-policy/`
+- Data Deletion instructions: `https://shivammadaan.com/data-deletion/`
+- Terms of Use: `https://shivammadaan.com/terms-of-use/`
+
+Use the Data Deletion URL as an **instructions URL**, not as an automated
+callback endpoint. Requests are handled manually through
+`official@shivammadaan.com`; the published target is to complete verified
+requests within 30 days, subject to applicable law and explained exceptions.
+Keep these notices aligned with Connektly's actual data processing and providers
+as the platform changes. These static pages deploy with GitHub Pages and are
+also included in the Render server's public page allowlist.
+
+## Local development
 
 Use Node.js 24 LTS. Dependencies are locked in `package-lock.json`.
 

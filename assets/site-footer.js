@@ -13,6 +13,7 @@
 
   const supportLinks = [
     ["Privacy Policy", "/privacy-policy"],
+    ["Data Deletion", "/data-deletion"],
     ["Terms of Use", "/terms-of-use"],
     ["Refund Policy", "/refund-policy"]
   ];

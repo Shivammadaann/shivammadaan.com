@@ -7,7 +7,8 @@
     ["Home", "/"],
     ["About", "/about"],
     ["Releases", "/releases"],
-    ["Contact", "/contact"]
+    ["Contact", "/contact"],
+    ["Shop", "/shop"]
   ];
 
   const supportLinks = [

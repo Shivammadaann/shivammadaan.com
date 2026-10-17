@@ -23,7 +23,8 @@ npm start
 ```
 
 Open `http://localhost:3000/shop`. Use this URL rather than a static preview
-server so `/api` requests reach the backend. `npm run dev` restarts the backend
+server, and temporarily set `apiBaseUrl` to `""` in `assets/shop-config.js` to
+test against the local backend. `npm run dev` restarts the backend
 when server files change. Restart after changing the catalog or environment.
 
 ## Deploy to Render
@@ -49,15 +50,19 @@ The Blueprint asks for the credentials during setup. The app binds to
 `0.0.0.0` and Render's `PORT`. Render's own `RENDER_EXTERNAL_URL` is automatically
 included in the allowed origins.
 
-**Serve the whole site on Render:** open `https://YOUR-SERVICE.onrender.com/shop`.
-Leave `apiBaseUrl` empty in `assets/shop-config.js`. No frontend build is needed.
+The deployed backend is `https://shivammadaan-com.onrender.com`. The GitHub Pages
+frontend is configured to call this service.
 
-**Keep the frontend on GitHub Pages:** after Render deploys, set `apiBaseUrl`
-in `assets/shop-config.js` to the actual Render service origin:
+**Serve the whole site on Render:** open `https://shivammadaan-com.onrender.com/shop`.
+Set `apiBaseUrl` to `""` in `assets/shop-config.js` for same-origin requests.
+No frontend build is needed.
+
+**GitHub Pages frontend:** `assets/shop-config.js` is configured with the deployed
+Render service origin:
 
 ```js
 window.SHOP_CONFIG = {
-  apiBaseUrl: "https://YOUR-SERVICE.onrender.com"
+  apiBaseUrl: "https://shivammadaan-com.onrender.com"
 };
 ```
 

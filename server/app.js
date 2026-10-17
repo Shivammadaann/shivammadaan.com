@@ -159,6 +159,7 @@ function createApp({ config, razorpay }) {
   // root with express.static: .env, backend source and dependencies stay private.
   app.use("/assets", express.static(path.join(siteRoot, "assets"), { dotfiles: "deny", index: false, redirect: false }));
   app.get("/favicon.png", (_req, res) => res.sendFile(path.join(siteRoot, "favicon.png")));
+  app.get("/sitemap.xml", (_req, res) => res.sendFile(path.join(siteRoot, "sitemap.xml")));
   for (const page of ["", "about", "releases", "contact", "shop"]) {
     app.get(page ? `/${page}` : "/", (_req, res) => res.sendFile(path.join(siteRoot, page, "index.html")));
   }

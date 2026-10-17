@@ -1,6 +1,7 @@
 (function () {
   const GA_MEASUREMENT_ID = "G-E5VL2CDSG7";
   const GTM_CONTAINER_ID = "GTM-NF3HQMRN";
+  const META_PIXEL_ID = "1505357614756887";
   const DEFAULT_FAVICON = "/favicon.png";
   const WATI_WEBCHAT_URL = "https://widget.wati.io/webchat.js?t=1099916&s=manual&d=328e6a25-582c-4fea-b9f5-540301f4c408";
 
@@ -121,6 +122,34 @@
     appendScriptOnce(WATI_WEBCHAT_URL, "wati-webchat");
   }
 
+  function installMetaPixel() {
+    if (window.__shivamMetaPixelLoaded) {
+      return;
+    }
+
+    window.__shivamMetaPixelLoaded = true;
+
+    if (!window.fbq) {
+      const fbq = function () {
+        if (fbq.callMethod) {
+          fbq.callMethod.apply(fbq, arguments);
+        } else {
+          fbq.queue.push(arguments);
+        }
+      };
+      window.fbq = fbq;
+      window._fbq = window._fbq || fbq;
+      fbq.push = fbq;
+      fbq.loaded = true;
+      fbq.version = "2.0";
+      fbq.queue = [];
+      appendScriptOnce("https://connect.facebook.net/en_US/fbevents.js", "meta-pixel");
+    }
+
+    window.fbq("init", META_PIXEL_ID);
+    window.fbq("track", "PageView");
+  }
+
   function installPersonSchema() {
     if (document.querySelector('script[type="application/ld+json"][data-site-schema="person"]')) {
       return;
@@ -178,6 +207,7 @@
 
   installGoogleTagManager();
   installGoogleAnalytics();
+  installMetaPixel();
   installWatiWebchat();
   installPersonSchema();
   installDefaultFavicon();

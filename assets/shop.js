@@ -29,15 +29,35 @@
     return node;
   }
 
-  function checkoutUrl(product) {
-    if (typeof product.price !== "number" || !Number.isFinite(product.price) || product.price <= 0) return null;
-    try {
-      const url = new URL(product.checkoutUrl);
-      return url.protocol === "https:" ? url.href : null;
-    } catch {
-      return null;
+  let paymentStorage;
+  try { paymentStorage = window.sessionStorage; } catch { /* Storage is optional. */ }
+  const checkout = window.createShopCheckout({
+    apiBaseUrl: window.SHOP_CONFIG?.apiBaseUrl || "",
+    currency: catalog.currency,
+    fetchRequest: window.fetch.bind(window),
+    loadCheckout: () => window.Razorpay,
+    storage: paymentStorage,
+    onState(state) {
+      const status = document.getElementById("payment-status");
+      status.hidden = false;
+      status.dataset.state = state.type;
+      document.getElementById("payment-message").textContent = state.message;
+      const reference = document.getElementById("payment-reference");
+      reference.textContent = state.paymentId ? `Payment ID: ${state.paymentId}` : "";
+      reference.hidden = !state.paymentId;
+      const retry = document.getElementById("payment-retry");
+      retry.hidden = !state.canRetry;
+      retry.disabled = state.busy;
+      const help = document.getElementById("payment-help");
+      help.hidden = !state.paymentId;
+      help.href = `mailto:${catalog.email}?subject=${encodeURIComponent("Shop payment and file delivery")}&body=${encodeURIComponent(`Hi Shivam, please help with my purchase.\n\nPayment ID: ${state.paymentId}`)}`;
+      grid.querySelectorAll(".product-action").forEach((button) => { button.disabled = state.blocked; });
+      if (!state.busy && ["success", "pending", "error", "cancelled"].includes(state.type)) {
+        status.focus({ preventScroll: false });
+      }
     }
-  }
+  });
+  document.getElementById("payment-retry").addEventListener("click", () => checkout.retryVerification());
 
   function openPurchase(song, product) {
     document.getElementById("purchase-artwork").src = song.artwork;
@@ -63,21 +83,15 @@
     info.innerHTML = icons[product.type] || icons.download;
     const copy = element("div");
     copy.append(element("h4", "", product.label));
-    const url = checkoutUrl(product);
     const hasPrice = typeof product.price === "number" && Number.isFinite(product.price) && product.price > 0;
     copy.append(element("p", hasPrice ? "product-price" : "", hasPrice ? priceFormatter.format(product.price) : productDescriptions[product.type]));
     info.append(copy);
 
-    const action = element(url ? "a" : "button", `button ${product.type === "download" ? "button-primary" : "button-secondary"} product-action`, url ? "Buy now ↗" : "Enquire to buy ↗");
-    action.setAttribute("aria-label", `${url ? "Buy" : "Enquire about"} ${product.label.toLowerCase()} for ${song.title} — ${song.version}`);
-    if (url) {
-      action.href = url;
-      action.target = "_blank";
-      action.rel = "noopener noreferrer";
-    } else {
-      action.type = "button";
-      action.addEventListener("click", () => openPurchase(song, product));
-    }
+    const action = element("button", `button ${product.type === "download" ? "button-primary" : "button-secondary"} product-action`, "Buy now ↗");
+    action.setAttribute("aria-label", `Buy ${product.label.toLowerCase()} for ${song.title} — ${song.version}`);
+    action.type = "button";
+    action.disabled = checkout.isBlocked();
+    action.addEventListener("click", () => checkout.buy(song, product));
     row.append(info, action);
     return row;
   }
@@ -134,7 +148,10 @@
     heading.append(title, preview);
     const products = element("div", "product-list");
     song.products.forEach((product) => products.append(renderProduct(song, product)));
-    content.append(heading, panel, products);
+    const enquiry = element("button", "song-enquiry", "Questions about this song? Get in touch ↗");
+    enquiry.type = "button";
+    enquiry.addEventListener("click", () => openPurchase(song, song.products[0]));
+    content.append(heading, panel, products, enquiry);
     card.append(art, content);
     return card;
   }

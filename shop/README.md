@@ -1,27 +1,22 @@
 # Music shop
 
-The `/shop` route is a static page, matching the rest of this GitHub Pages site.
-Song covers are stored locally in `assets/shop/` and the catalog lives in
-`assets/shop-catalog.js`.
+The `/shop` page lists the two songs with separate digital-download and project
+stems products at INR 99 each. Both formats use Razorpay Standard Checkout.
 
-Each song has separate `download` and `stems` products, each priced at INR 99.
-Until payment links are supplied, **Enquire to buy** opens a dialog with email
-and WhatsApp links prefilled with the selected song, version, product, and
-listed price. Opening the dialog does not send a message or place an order.
+- `assets/shop-catalog.js` is shared by the browser and backend. The backend
+  determines prices from its own copy of this catalog.
+- `assets/shop-config.js` selects the API origin. Leave it empty for a site
+  served by Render; set the actual Render origin for a GitHub Pages frontend.
+- `assets/shop-checkout.js` handles checkout, cancellation, failure, verification,
+  and retrying a pending verification without creating a second order.
+- `assets/shop.js` renders products, Spotify previews, and payment status.
+- Covers are local files in `assets/shop/`, retrieved from the original Spotify
+  tracks' oEmbed metadata.
 
-To enable a product's **Buy now** link:
+Credentials belong only in the backend environment. The public key ID is returned
+by the order endpoint; the secret is never sent to the browser.
 
-1. Create a product with a payment provider that supports digital file delivery,
-   and upload the purchased files through that provider.
-2. Set `price` to the amount in major currency units in the catalog. Currency
-   defaults to `INR`; update `currency` if needed.
-3. Set that product's `checkoutUrl` to its public HTTPS checkout link.
-4. Update the shop's purchase note, FAQ, and description to match the provider's
-   actual checkout and delivery process once all products are connected.
+Payment verification is implemented. File delivery remains manual until paid
+audio and stems are supplied and private download delivery is implemented.
 
-Each product needs its own checkout link so the song and format cannot be
-confused. Paid audio and stems are delivered by the payment provider, rather
-than being placed in this public site repository. This page does not process
-payments, verify orders, or grant file access itself.
-
-Artwork was retrieved from the existing Spotify tracks' oEmbed metadata.
+See [the deployment and testing guide](../README.md).

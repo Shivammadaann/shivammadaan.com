@@ -84,6 +84,15 @@ h2 { margin: 12px 0 0; font-family: "Kalam", cursive; font-size: clamp(1.8rem, 3
 .product-info p { margin: 4px 0 0; color: #90909b; font-size: 0.68rem; }
 .product-info .product-price { color: #e4e4ec; font-size: 0.88rem; font-weight: 700; }
 .product-action { flex-shrink: 0; gap: 8px; min-height: 38px; padding: 9px 13px; font-size: 0.68rem; }
+.product-action:disabled { cursor: wait; opacity: 0.55; }
+.song-enquiry { margin-top: 22px; padding: 0; border: 0; background: transparent; color: #a6bbde; text-align: left; font-size: 0.68rem; text-decoration: underline; text-underline-offset: 4px; }
+.payment-status { margin-bottom: 24px; padding: 20px; border: 1px solid #2563eb66; border-radius: 10px; background: #2563eb12; }
+.payment-status[data-state="success"] { border-color: #22c55e77; background: #22c55e12; }
+.payment-status[data-state="error"], .payment-status[data-state="pending"] { border-color: #f59e0b77; background: #f59e0b0c; }
+.payment-status p { margin: 0; font-size: 0.82rem; line-height: 1.8; }
+.payment-status .payment-reference { margin-top: 8px; font-family: monospace; overflow-wrap: anywhere; }
+.payment-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.payment-actions:has(.button:not([hidden])) { margin-top: 16px; }
 .purchase-note { max-width: 660px; margin: 24px auto 0; color: #90909b; font-size: 0.72rem; line-height: 1.8; text-align: center; }
 .formats-section { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #060608; }
 .formats-section .shell { padding-top: 48px; padding-bottom: 48px; }

@@ -1,7 +1,6 @@
-// Prices are in major currency units. Add each product's hosted checkout URL
-// when ready. The payment provider must handle payment and digital-file delivery.
-// Products without a checkout URL accept purchase enquiries at the listed price.
-window.SHOP_CATALOG = {
+// Shared by the browser and Node backend. Prices are in major currency units;
+// the server reads this catalog directly rather than trusting a browser amount.
+const catalog = {
   currency: "INR",
   email: "official@shivammadaan.com",
   whatsapp: "918445544920",
@@ -13,8 +12,8 @@ window.SHOP_CATALOG = {
       artwork: "/assets/shop/the-night-we-met.jpg",
       spotifyId: "05J1czArtu71FxK7RnXxHY",
       products: [
-        { type: "download", label: "Digital download", price: 99, checkoutUrl: "" },
-        { type: "stems", label: "Project stems", price: 99, checkoutUrl: "" }
+        { type: "download", label: "Digital download", price: 99 },
+        { type: "stems", label: "Project stems", price: 99 }
       ]
     },
     {
@@ -24,9 +23,14 @@ window.SHOP_CATALOG = {
       artwork: "/assets/shop/mann-bharrya.jpg",
       spotifyId: "2bvi3R68LT1OlhdqVyw2Q5",
       products: [
-        { type: "download", label: "Digital download", price: 99, checkoutUrl: "" },
-        { type: "stems", label: "Project stems", price: 99, checkoutUrl: "" }
+        { type: "download", label: "Digital download", price: 99 },
+        { type: "stems", label: "Project stems", price: 99 }
       ]
     }
   ]
 };
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = catalog;
+} else {
+  window.SHOP_CATALOG = catalog;
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Shop Shivam Madaan's music. Explore digital song downloads and project stems, listen to the songs, and enquire directly about your purchase." />
+  <meta name="description" content="Shop Shivam Madaan's music. Buy digital song downloads and project stems for ₹99 each with secure Razorpay checkout." />
   <title>Shop | Shivam Madaan</title>
   <link rel="canonical" href="https://shivammadaan.com/shop" />
   <link rel="icon" type="image/png" href="/favicon.png" />
@@ -14,7 +14,10 @@
   <link rel="stylesheet" href="/assets/shop-link.css" />
   <script src="/assets/site-integrations.js" defer></script>
   <script src="/assets/site-footer.js" defer></script>
+  <script src="/assets/shop-config.js" defer></script>
   <script src="/assets/shop-catalog.js" defer></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+  <script src="/assets/shop-checkout.js" defer></script>
   <script src="/assets/shop.js" defer></script>
 </head>
 <body>
@@ -77,6 +80,14 @@
           </div>
           <span class="digital-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v5h14v-5" /></svg> Digital products only</span>
         </div>
+        <div class="payment-status" id="payment-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
+          <p id="payment-message"></p>
+          <p class="payment-reference" id="payment-reference" hidden></p>
+          <div class="payment-actions">
+            <button class="button button-primary" type="button" id="payment-retry" hidden>Retry verification</button>
+            <a class="button button-secondary" id="payment-help" hidden>Contact about this payment</a>
+          </div>
+        </div>
         <div class="song-grid" id="song-grid"></div>
         <noscript>
           <div class="song-grid">
@@ -94,7 +105,7 @@
             </article>
           </div>
         </noscript>
-        <p class="purchase-note">Digital downloads and project stems are &#8377;99 each. Choose a format to enquire about your purchase. Payment and file delivery details are confirmed directly before you buy.</p>
+        <p class="purchase-note">Digital downloads and project stems are &#8377;99 each. Pay securely with Razorpay. After payment is verified, contact the shop with your payment ID to arrange file delivery.</p>
       </div>
     </section>
 
@@ -121,9 +132,9 @@
       <div class="shell faq-layout">
         <div><p class="eyebrow">A FEW DETAILS</p><h2 id="faq-title">Before you buy.</h2><p class="faq-help">Need something else?<br /><a href="/contact">Get in touch <span aria-hidden="true">&nearr;</span></a></p></div>
         <div class="faq-list">
-          <details><summary>How do I purchase a song or its stems?</summary><p>Each digital download and each project stems package costs &#8377;99. Choose your preferred format on a song, then send a purchase enquiry by email or WhatsApp. Availability, payment, and delivery details are confirmed directly with Shivam Madaan before placing an order.</p></details>
+          <details><summary>How do I purchase a song or its stems?</summary><p>Each digital download and each project stems package costs &#8377;99. Choose Buy now next to your preferred format and complete payment in Razorpay’s secure checkout. Keep the payment ID shown after your payment is verified.</p></details>
           <details><summary>Which file formats and stems are included?</summary><p>Available audio formats and the exact contents of a stems package are confirmed for your chosen song before purchase. Mention any specific format or production requirements in your enquiry.</p></details>
-          <details><summary>How will I receive my files?</summary><p>These are digital products, with no physical shipping. The download method and delivery timing will be confirmed with your order before payment.</p></details>
+          <details><summary>How will I receive my files?</summary><p>Files are currently delivered manually. After your payment is verified, use Contact about this payment to arrange delivery directly with Shivam Madaan. There is no automatic download link. Contact the shop before buying if you need to confirm file contents or delivery timing.</p></details>
         </div>
       </div>
     </section>

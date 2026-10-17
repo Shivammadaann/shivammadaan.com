@@ -1,5 +1,5 @@
 (function () {
-  const GA_MEASUREMENT_ID = "G-E5VL2CDSG7";
+  const GA_MEASUREMENT_ID = "G-QKJE37G2BC";
   const GTM_CONTAINER_ID = "GTM-NF3HQMRN";
   const META_PIXEL_ID = "1505357614756887";
   const DEFAULT_FAVICON = "/favicon.png";
@@ -96,6 +96,11 @@
   }
 
   function installGoogleAnalytics() {
+    if (window.__shivamGaLoaded) {
+      return;
+    }
+
+    window.__shivamGaLoaded = true;
     appendScriptOnce(`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`, "ga4");
     window.gtag("js", new Date());
     window.gtag("config", GA_MEASUREMENT_ID, {
